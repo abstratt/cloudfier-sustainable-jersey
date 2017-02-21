@@ -2,19 +2,61 @@ package green_biz_dir;
 
 class Business
     attribute name : String;
-    attribute address : Address;
+    attribute location : Location[0,1];
+    attribute category : Category[*];
+    attribute website : String[0,1];
+    reference owner : Contributor[0,1];
+    (* Is this business yours? You can claim it. *)
+    operation claim();
+    
+    private operation newOwner(contributor : Contributor);
+    begin
+        self.owner := contributor;
+    end;
 end;
 
-datatype Address
+datatype Location
     attribute streetAddress : String;
     attribute city : String;
-    attribute zipCode : String;
-    attribute website : String;
-    attribute phoneNumber : String; 
+    attribute zipCode : String[0,1];
+    attribute phoneNumber : String[0,1]; 
+end;
+
+class BusinessClaim
+    attribute requestor : Contributor;
+    attribute business : Business;
+    (* Accept this claim. *)
+    operation accept() allow Curator;
+    operation reject() allow Curator;
+    statemachine Status
+        initial state Requested
+            transition on call(accept) to Accepted;
+            transition on call(reject) to Rejected;            
+        end;
+        state Rejected end;
+        state Accepted 
+            entry {
+                self.business.newOwner(self.requestor);
+            };         
+        end;
+    end;
 end;
 
 class Category
     attribute name : String;
+    attribute businesses : Business[*];
+end;
+
+association
+    role Category.businesses;
+    role Business.category;
+end;
+
+role class Contributor
+    attribute name : String;
+end;
+
+role class Curator specializes Contributor
 end;
 
 end.

@@ -1,0 +1,19 @@
+{
+  "userprofile" : {
+    "Profile" : [ ]
+  },
+  "green_biz_dir" : {
+    "Curator" : [ ],
+    "Contributor" : [ ],
+    "Category" : [ {
+      "name" : "Fruits & Vegetables"
+    }, {
+      "name" : "Flowers"
+    } ],
+    "Business" : [ {
+      "name" : "Green Flowers",
+      "website" : ".",
+      "category" : [ "green_biz_dir.Category@2" ]
+    } ]
+  }
+}

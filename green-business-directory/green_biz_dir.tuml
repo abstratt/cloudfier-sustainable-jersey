@@ -1,0 +1,20 @@
+package green_biz_dir;
+
+class Business
+    attribute name : String;
+    attribute address : Address;
+end;
+
+datatype Address
+    attribute streetAddress : String;
+    attribute city : String;
+    attribute zipCode : String;
+    attribute website : String;
+    attribute phoneNumber : String; 
+end;
+
+class Category
+    attribute name : String;
+end;
+
+end.

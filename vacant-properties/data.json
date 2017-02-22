@@ -1,0 +1,83 @@
+{
+  "userprofile" : {
+    "Profile" : [ ]
+  },
+  "vacant_properties" : {
+    "PropertyKind" : [ {
+      "name" : "Townhouse"
+    }, {
+      "name" : "Commercial building"
+    }, {
+      "name" : "Apartment building"
+    }, {
+      "name" : "Lot"
+    } ],
+    "Property" : [ {
+      "streetAddress" : "2371 Lam Circle",
+      "city" : "Newark",
+      "zipCode" : null,
+      "status" : "Available",
+      "kind" : "vacant_properties.PropertyKind@3"
+    }, {
+      "streetAddress" : "123 Main St",
+      "city" : "Newark",
+      "zipCode" : null,
+      "status" : "Available",
+      "kind" : "vacant_properties.PropertyKind@4"
+    }, {
+      "streetAddress" : "250 Elm St",
+      "city" : "Neptune",
+      "zipCode" : null,
+      "status" : "Available",
+      "kind" : "vacant_properties.PropertyKind@2"
+    }, {
+      "streetAddress" : "233 River Road",
+      "city" : "New London",
+      "zipCode" : null,
+      "status" : "Available",
+      "kind" : "vacant_properties.PropertyKind@3"
+    }, {
+      "streetAddress" : "104 Thomaston Road",
+      "city" : "Preston",
+      "zipCode" : null,
+      "status" : "Available",
+      "kind" : "vacant_properties.PropertyKind@4"
+    } ],
+    "Citizen" : [ {
+      "name" : "Immanuel Kant"
+    }, {
+      "name" : "Friedrich Nietzsche"
+    }, {
+      "name" : "John Locke"
+    }, {
+      "name" : "Adam Smith"
+    }, {
+      "name" : "Thomas Hobbes"
+    } ],
+    "PropertyBid" : [ {
+      "offer" : 10500,
+      "purpose" : "Residential house",
+      "bidDate" : "2017/02/22",
+      "completionDate" : null,
+      "status" : "Active",
+      "bidder" : "vacant_properties.Citizen@2",
+      "property" : "vacant_properties.Property@5"
+    }, {
+      "offer" : 12000,
+      "purpose" : "Family home",
+      "bidDate" : "2017/02/22",
+      "completionDate" : null,
+      "status" : "Active",
+      "bidder" : "vacant_properties.Citizen@3",
+      "property" : "vacant_properties.Property@5"
+    }, {
+      "offer" : 7500,
+      "purpose" : "Develop commercial building",
+      "bidDate" : "2017/02/22",
+      "completionDate" : null,
+      "status" : "Active",
+      "bidder" : "vacant_properties.Citizen@1",
+      "property" : "vacant_properties.Property@1"
+    } ]
+  }
+}

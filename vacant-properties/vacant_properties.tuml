@@ -6,10 +6,15 @@ class Property
     attribute zipCode : String[0,1];
     attribute kind : PropertyKind;
     reference bids : PropertyBid[*] opposite \property;
+    derived attribute bidCount : Integer := { self.bids.size() };
     attribute status : PropertyStatus;
     readonly attribute winningBid : PropertyBid[0,1];
+    derived attribute highestBid : PropertyBid[0,1] := {
+    	self.bids.maxElement((b : PropertyBid) : Integer { b.offer })
+	};
     
-    operation bid(offer : Integer, purpose : Memo, bidder : Citizen := { (System#user() as Citizen) }) : PropertyBid;
+    operation bid(offer : Integer, purpose : Memo, bidder : Bidder := { (System#user() as Bidder) }) : PropertyBid
+        precondition { self.status == PropertyStatus#Available };
     begin
         return PropertyBid#bid(self, bidder, offer, purpose);
     end;
@@ -29,17 +34,17 @@ class Property
         state Sold end;
     end;
 
-    static query totalSold() : Integer;
+    static query totalSold() : String;
     begin
-        return Property#propertiesSold().sum((p : Property) : Integer { p.winningBid.offer });
+        return "$"+ Property#unitsSold().sum((p : Property) : Integer { p.winningBid.offer });
     end;
 
     
-    static query propertiesAvailable() : Property[*];
+    static query unitsAvailable() : Property[*];
     begin
 	    return Property extent.select((p : Property) : Boolean { p.status == PropertyStatus#Available });
     end;
-    static query propertiesSold() : Property[*];
+    static query unitsSold() : Property[*];
     begin
 	    return Property extent.select((p : Property) : Boolean { p.status == PropertyStatus#Sold });
     end;
@@ -55,7 +60,7 @@ end;
 
 class PropertyBid
     derived attribute summary : String := { "$" + self.offer.toString() + " by " + self.bidder.name };
-    readonly attribute bidder : Citizen;
+    readonly attribute bidder : Bidder;
     readonly attribute \property : Property;    
     readonly attribute offer : Integer;
     readonly attribute purpose : Memo;
@@ -80,7 +85,7 @@ class PropertyBid
     end;
     private static operation bid(
     	propertyToBidOn : Property, 
-    	bidder : Citizen,
+    	bidder : Bidder,
     	offer : Integer,
     	purpose : Memo) : PropertyBid;
     begin
@@ -127,7 +132,7 @@ association
     role Property.kind;
 end;
 
-role class Citizen
+role class Bidder
     attribute name : String;
 end;
 

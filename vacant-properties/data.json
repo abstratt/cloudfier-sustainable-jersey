@@ -43,7 +43,7 @@
       "status" : "Available",
       "kind" : "vacant_properties.PropertyKind@4"
     } ],
-    "Citizen" : [ {
+    "Bidder" : [ {
       "name" : "Immanuel Kant"
     }, {
       "name" : "Friedrich Nietzsche"
@@ -60,7 +60,7 @@
       "bidDate" : "2017/02/22",
       "completionDate" : null,
       "status" : "Active",
-      "bidder" : "vacant_properties.Citizen@2",
+      "bidder" : "vacant_properties.Bidder@2",
       "property" : "vacant_properties.Property@5"
     }, {
       "offer" : 12000,
@@ -68,7 +68,7 @@
       "bidDate" : "2017/02/22",
       "completionDate" : null,
       "status" : "Active",
-      "bidder" : "vacant_properties.Citizen@3",
+      "bidder" : "vacant_properties.Bidder@3",
       "property" : "vacant_properties.Property@5"
     }, {
       "offer" : 7500,
@@ -76,7 +76,7 @@
       "bidDate" : "2017/02/22",
       "completionDate" : null,
       "status" : "Active",
-      "bidder" : "vacant_properties.Citizen@1",
+      "bidder" : "vacant_properties.Bidder@1",
       "property" : "vacant_properties.Property@1"
     } ]
   }

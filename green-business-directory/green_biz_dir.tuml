@@ -6,8 +6,15 @@ class Business
     attribute category : Category[*];
     attribute website : String[0,1];
     reference owner : Contributor[0,1];
+    readonly attribute greenCertified : Boolean[0,1] := false;
     (* Is this business yours? You can claim it. *)
     operation claim();
+    
+    operation certifyGreen()
+        precondition { !self.greenCertified };
+    begin
+        self.greenCertified := true;
+    end;
     
     private operation newOwner(contributor : Contributor);
     begin

@@ -1,81 +1,112 @@
 package vacant_properties;
 
 class Property
+
     attribute streetAddress : String;
+
     attribute city : String;
-    attribute zipCode : String[0,1];
+
+    attribute zipCode : String[0, 1];
+
     attribute kind : PropertyKind;
-    reference bids : PropertyBid[*] opposite \property;
+
+    reference bids : PropertyBid[*]opposite \property;
+
     derived attribute bidCount : Integer := { self.bids.size() };
+
     attribute status : PropertyStatus;
-    readonly attribute winningBid : PropertyBid[0,1];
-    derived attribute highestBid : PropertyBid[0,1] := {
-    	self.bids.maxElement((b : PropertyBid) : Integer { b.offer })
-	};
-    
-    operation bid(offer : Integer, purpose : Memo, bidder : Bidder := { (System#user() as Bidder) }) : PropertyBid
+
+    readonly attribute winningBid : PropertyBid[0, 1];
+
+    derived attribute highestBid : PropertyBid[0, 1] := {
+        self.bids.maxElement((b : PropertyBid) : Integer { b.offer })
+    };
+
+    operation bid(offer : Integer, purpose : Memo, bidder : Bidder := {
+        (System#user() as Bidder)
+    }) : PropertyBid
         precondition { self.status == PropertyStatus#Available };
     begin
         return PropertyBid#bid(self, bidder, offer, purpose);
     end;
-    
+
     private operation sold(winningBid : PropertyBid);
     begin
         self.winningBid := winningBid;
         self.bids.forEach((it : PropertyBid) {
-        	send PropertySold() to it; 
-    	});
+            send PropertySold() to it;
+        });
     end;
-    
+
     statemachine PropertyStatus
-        initial state Available 
+
+        initial state Available
             transition on call(sold) to Sold;
         end;
+
         state Sold end;
+
     end;
+
 
     static query totalSold() : String;
     begin
-        return "$"+ Property#unitsSold().sum((p : Property) : Integer { p.winningBid.offer });
+        return "$" + Property#unitsSold().sum((p : Property) : Integer {
+            p.winningBid.offer
+        });
     end;
 
-    
     static query unitsAvailable() : Property[*];
     begin
-	    return Property extent.select((p : Property) : Boolean { p.status == PropertyStatus#Available });
-    end;
-    static query unitsSold() : Property[*];
-    begin
-	    return Property extent.select((p : Property) : Boolean { p.status == PropertyStatus#Sold });
+        return Property extent.select((p : Property) : Boolean {
+            p.status == PropertyStatus#Available
+        });
     end;
 
+    static query unitsSold() : Property[*];
+    begin
+        return Property extent.select((p : Property) : Boolean {
+            p.status == PropertyStatus#Sold
+        });
+    end;
 end;
 
 signal PropertySold
 end;
 
 class PropertyKind
+
     attribute name : String;
 end;
 
 class PropertyBid
-    derived attribute summary : String := { "$" + self.offer.toString() + " by " + self.bidder.name };
+
+    derived attribute summary : String := {
+        "$" + self.offer.toString() + " by " + self.bidder.name
+    };
+
     readonly attribute bidder : Bidder;
-    readonly attribute \property : Property;    
+
+    readonly attribute \property : Property;
+
     readonly attribute offer : Integer;
+
     readonly attribute purpose : Memo;
+
     readonly attribute bidDate : Date := { Date#today() };
-    readonly attribute completionDate : Date[0,1];    
+
+    readonly attribute completionDate : Date[0, 1];
+
     attribute status : BidStatus;
-    
+
     static query byProperty(\property : Property) : PropertyBid[*];
     begin
         return PropertyBid extent.select((b : PropertyBid) : Boolean {
-        	b.\property == \property
+            b.\property == \property
         });
     end;
 
-	(* Withdraw this bid. *)
+    (* Withdraw this bid. *)
     operation withdraw();
 
     (* Accept this bid. All other bids will be rejected. *)
@@ -83,11 +114,9 @@ class PropertyBid
     begin
         send PropertySold() to self.\property;
     end;
-    private static operation bid(
-    	propertyToBidOn : Property, 
-    	bidder : Bidder,
-    	offer : Integer,
-    	purpose : Memo) : PropertyBid;
+
+    private static operation bid(propertyToBidOn : Property, bidder : Bidder, offer : Integer, 
+            purpose : Memo) : PropertyBid;
     begin
         var bid : PropertyBid;
         bid := new PropertyBid;
@@ -97,44 +126,49 @@ class PropertyBid
         bid.offer := offer;
         return bid;
     end;
-    
+
     statemachine BidStatus
-        initial state Active 
+
+        initial state Active
             transition on call(accept) to Accepted;
             transition on call(withdraw) to Withdrawn;
-            transition on signal(PropertySold) to Rejected;  
+            transition on signal(PropertySold) to Rejected;
         end;
-        
+
         state Accepted
             entry {
-            	self.\property.sold(self);
+                self.\property.sold(self);
                 self.completionDate := Date#today();
             };
         end;
-        
+
         state Withdrawn
             entry {
-            	self.completionDate := Date#today();
+                self.completionDate := Date#today();
             };
         end;
-        
-        state Rejected 
+
+        state Rejected
             entry {
-            	self.completionDate := Date#today();
+                self.completionDate := Date#today();
             };
         end;
+
     end;
+
 end;
 
-
 association
+
     role \property : Property[*];
+
     role Property.kind;
+
 end;
 
 role class Bidder
+
     attribute name : String;
 end;
-
 
 end.

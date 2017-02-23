@@ -3,17 +3,19 @@
     "Profile" : [ ]
   },
   "green_biz_dir" : {
-    "Curator" : [ ],
     "Contributor" : [ ],
-    "Category" : [ {
-      "name" : "Fruits & Vegetables"
-    }, {
-      "name" : "Flowers"
-    } ],
     "Business" : [ {
       "name" : "Green Flowers",
       "website" : ".",
-      "category" : [ "green_biz_dir.Category@2" ]
+      "greenCertified" : false
+    } ],
+    "Curator" : [ ],
+    "Category" : [ {
+      "name" : "Fruits & Vegetables",
+      "businesses" : [ ]
+    }, {
+      "name" : "Flowers",
+      "businesses" : [ "green_biz_dir.Business@1" ]
     } ]
   }
 }

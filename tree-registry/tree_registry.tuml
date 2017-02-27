@@ -1,0 +1,42 @@
+package tree_registry;
+
+class Tree
+
+    derived id attribute treeNumber : Integer;
+
+    (* 
+        Have the app pick up the GPS Location, I guess give directions to user to stand at the base of the tree and snap an instance to track location for the map pin
+    *)
+    attribute location : GPSLocation[0,1];
+
+    attribute streetAddress : String[0,1];
+
+    (* Take a larger stand back, capture picture of the whole tree *)
+    attribute treePicture : Image[0, 1];
+
+    (* 
+    	Taking a picture of the leaf with a contrasting background 
+    	will allow user to potentially identify common tree types 
+    	with this picture - we were using LEAFSNAP App to do 
+    	this with some success.
+	*)
+    attribute leafPicture : Image[0, 1];
+    
+    (* What type of tree is it, by name, tree species etc *)
+    attribute treeType : TreeType;
+    
+end;
+
+class TreeType
+    attribute commonName : String;
+    attribute scientificName : String[0,1];
+end;
+
+datatype GPSLocation
+
+    attribute latitude : Double;
+
+    attribute longitude : Double;
+end;
+
+end.

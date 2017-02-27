@@ -1,0 +1,30 @@
+{
+  "userprofile" : {
+    "Profile" : [ ]
+  },
+  "tree_registry" : {
+    "TreeType" : [ {
+      "commonName" : "Eastern Red Cedar",
+      "scientificName" : "Juniperus virginiana"
+    }, {
+      "commonName" : "Austrian Pine",
+      "scientificName" : "Pinus nigra"
+    }, {
+      "commonName" : "European Larch",
+      "scientificName" : "Larix decidua"
+    }, {
+      "commonName" : "Emerald Green Arborvitae",
+      "scientificName" : "Thuja occidentalis"
+    }, {
+      "commonName" : "Northern white pine",
+      "scientificName" : "Pinus strobus L."
+    }, {
+      "commonName" : "Virginia Pine",
+      "scientificName" : "Pinus virginiana"
+    }, {
+      "commonName" : "Virginia Pine",
+      "scientificName" : "Pinus virginiana"
+    } ],
+    "Tree" : [ ]
+  }
+}

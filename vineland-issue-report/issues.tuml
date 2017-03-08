@@ -1,0 +1,78 @@
+package issues;
+
+
+class Issue
+    attribute issueType : IssueType;
+    attribute description : Memo;
+    readonly attribute reportDate : Date := { Date#today() };
+    readonly attribute submitter : Submitter;
+    
+    readonly attribute acceptanceDate : Date[0,1];
+    
+    readonly attribute completionDate : Date[0,1];
+    
+    readonly attribute staffComment : String[0,1] := "";
+    
+    static query issuesToValidate() : Issue[*];
+    begin
+        return Issue extent.select((i : Issue) : Boolean { i.status == Status#Submitted});
+    end;
+    
+    static query issuesToComplete() : Issue[*];
+    begin
+        return Issue extent.select((i : Issue) : Boolean { i.status == Status#Accepted});
+    end;
+
+    static query completedIssues() : Issue[*];
+    begin
+        return Issue extent.select((i : Issue) : Boolean { i.status == Status#Completed});
+    end;
+    
+    static query bySubmitter(submitter : Submitter) : Issue[*];
+    begin
+        return Issue extent.select((i : Issue) : Boolean { i.submitter == submitter });
+    end;
+
+
+    attribute location : String[0,1];
+    
+    attribute photo : String[0,1];
+    
+    attribute status : Status;
+    operation accept();
+    
+    operation reject(reason : String);
+    begin
+        self.staffComment := reason;
+    end;
+
+    operation complete();
+    
+    statemachine Status
+        initial state Submitted
+            transition on call(accept) to Accepted;
+            transition on call(reject) to Invalid;
+        end;
+        state Invalid
+        end;
+        state Accepted
+            entry { self.acceptanceDate := Date#today(); };
+            transition on call(complete) to Completed;        
+        end;
+        state Completed
+            entry { self.completionDate := Date#today(); };
+        end;
+    end;
+end;
+
+role class Submitter
+    attribute email : String;
+    attribute firstName : String;
+    attribute lastName : String;
+end;
+
+class IssueType
+    attribute name : String;
+end;
+
+end.

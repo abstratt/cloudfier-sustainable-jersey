@@ -49,13 +49,15 @@ class Property
     end;
 
 
-    static query totalSold() : String;
+/*
+  Causes a codegen bug.
+  static query totalSold() : String;
     begin
         return "$" + Property#unitsSold().sum((p : Property) : Integer {
             p.winningBid.offer
         });
     end;
-
+*/
     static query unitsAvailable() : Property[*];
     begin
         return Property extent.select((p : Property) : Boolean {
@@ -111,9 +113,6 @@ class PropertyBid
 
     (* Accept this bid. All other bids will be rejected. *)
     operation accept();
-    begin
-        send PropertySold() to self.\property;
-    end;
 
     private static operation bid(propertyToBidOn : Property, bidder : Bidder, offer : Integer, 
             purpose : Memo) : PropertyBid;

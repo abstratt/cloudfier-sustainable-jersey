@@ -1,0 +1,95 @@
+package eab_connector;
+
+abstract class Person
+
+    attribute firstName : String;
+
+    attribute lastName : String;
+end;
+
+role class Expert specializes Person
+
+    attribute credentials : Memo;
+
+    attribute requestsReceived : InspectionRequest[*];
+
+    operation requestInspectionFor(resident : Resident);
+    begin
+        var inspection : InspectionRequest;
+        inspection := new InspectionRequest;
+        inspection.resident := resident;
+        inspection.expert := self;
+    end;
+
+    operation requestInpection()
+        allow Resident;
+    begin
+        self.requestInspectionFor((System#user() as Resident));
+    end;
+end;
+
+role class Resident specializes Person
+
+    attribute requestsMade : InspectionRequest[*];
+end;
+
+class InspectionRequest
+
+    readonly attribute requestDate : Date := { Date#today() };
+
+    readonly reference resident : Resident opposite requestsMade;
+
+    readonly reference expert : Expert opposite requestsReceived;
+
+    attribute status : Status;
+    
+    static query inProgress() : Integer;
+    begin
+        return InspectionRequest extent.count((req: InspectionRequest) : Boolean { req.status == Status#Accepted });
+    end;
+    
+    
+    static query confirmed() : Integer;
+    begin
+        return InspectionRequest extent.count((req: InspectionRequest) : Boolean { req.status == Status#Confirmed });
+    end;    
+
+    operation accept()
+        allow Expert{ self.expert == (System#user() as Expert) };
+
+    operation complete(outcome : Memo)
+        allow Expert{ self.expert == (System#user() as Expert) };
+
+    operation confirm(outcome : Memo)
+        allow Resident{ self.resident == (System#user() as Resident) };
+
+    operation cancel(reason : Memo)
+        allow Resident{ self.resident == (System#user() as Resident) };
+
+    operation transferRequest(newExpert : Expert);
+
+    statemachine Status
+
+        initial state Request
+            transition on call(accept) to Accepted;
+            transition on call(cancel) to Cancelled;
+        end;
+
+        state Accepted
+            transition on call(complete) to Completed;
+            transition on call(cancel) to Cancelled;
+        end;
+
+        state Completed
+            transition on call(confirm) to Confirmed;
+        end;
+
+        state Confirmed end;
+
+        state Cancelled end;
+
+    end;
+
+end;
+
+end.

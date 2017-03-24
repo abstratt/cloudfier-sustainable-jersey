@@ -1,3 +1,5 @@
+### Verona: EAB connector
+
 The tree-killing Emerald Ash Borer (EAB) has been detected in
 Montclair and it will be in Verona soon. We would like to help
 residents be able to identify if they have ash trees in their

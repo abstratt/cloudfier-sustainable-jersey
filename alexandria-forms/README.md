@@ -1,15 +1,10 @@
-Service Request Response Mobile App: for community / environmental issues 
-needing attention. For residents use to report issues such as potholes, 
-litter, missing signs, blocked storm drains, illegal dumping, graffiti, 
-information on trees, and more. 
-The features that would be useful are: The user would send a picture, 
-and the App would capture GPS coordinates of the issue, along with a short 
-form or space provided for brief text and/or a dropdown box of common issues. 
-(Perhaps the information could be saved by the user to submit later). 
-The report would be sent to an email address, and concurrently the same 
-information would be loaded to a map for City use only. 
-The app would capture the phone information (sender’s email) so that 
-the resident could receive a report back when the issue is resolved. 
+### Alexandria: Online Public Records and Forms
+
+In an effort to increase citizen participation and make government more
+efficient, Alexandria needs help digitizing certain public records and bring
+government functions online (i.e. interactive forms, applications, permits,
+service requests, etc.) The Township doesn't have the finances to fix these
+problems and come up with solutions. 
 
 ### Demo videos
 

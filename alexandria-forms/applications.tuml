@@ -25,6 +25,14 @@ class Resident specializes Person
     attribute homePhone : String[0,1];   
     attribute workPhone : String[0,1];
     attribute emailAddress : String[0,1];    
+    
+
+    static query findByName(firstName : String[0, 1], lastName : String[0, 1]) : Resident[*];
+    begin
+        return Resident extent.select((c : Resident) : Boolean {
+            c.firstName = firstName or c.lastName = lastName
+        });
+    end;
 end;
 
 end.

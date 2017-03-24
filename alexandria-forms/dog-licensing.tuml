@@ -2,6 +2,11 @@ package applications;
 
 import mdd_media;
 
+association DogLicenseApplicant
+	navigable role dogLicenseApplications : DogLicenseApplication[*]; 
+	role DogLicenseApplication.dogOwner;	
+end;
+
 class DogLicenseApplication
     allow SystemAdministrator all;
     allow CityOfficial create, read, update, call, static call;    
@@ -10,7 +15,7 @@ class DogLicenseApplication
     allow Resident update { (System#user() as Resident) == self.dogOwner and (self.status < Status#Submitted) };  
     
     private derived id attribute internalNumber : Integer;
-    derived id attribute applicationNumber : String := { "DL" + self.internalNumber };
+    derived id attribute number : String := { "DGL" + self.internalNumber };
 	attribute status : Status;
     readonly attribute dogOwner : Resident := { (System#user() as Resident )}
         allow Resident read ;
@@ -123,6 +128,12 @@ class DogLicenseApplication
 		end;
 		state Canceled end;
 	end;
+	
+	
+    static query dogOwners() : Resident[*];
+    begin
+        return DogLicenseApplication extent.collect((i : DogLicenseApplication) : Resident { i.dogOwner });
+    end;
 
 end;
 

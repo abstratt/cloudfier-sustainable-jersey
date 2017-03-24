@@ -17,18 +17,18 @@ the resident could receive a report back when the issue is resolved.
 
 ### Live app
 
-[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-vineland-issue-report/)
+[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-vineland-service-request/)
 
-[REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-vineland-issue-report/)
+[REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-vineland-service-request/)
 
 ### Live Diagrams
 
 #### Class diagram
 
-![Class diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vineland-issue-report/package/issues.uml?showClassifierCompartments=Always&showStaticFeatures=true&showClasses=true&showAssociationEndName=true&showAttributes=true&showOperations=true&showComments=true&showParameters=true&showAssociationEndMultiplicity=true&showMinimumVisibility=Public&showFeatureVisibility=false&showParameterNames=false&showDerivedElements=false)
+![Class diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vineland-service-request/package/service_requests.uml?showClassifierCompartments=Always&showStaticFeatures=true&showClasses=true&showAssociationEndName=true&showAttributes=true&showOperations=true&showComments=true&showParameters=true&showAssociationEndMultiplicity=true&showMinimumVisibility=Public&showFeatureVisibility=false&showParameterNames=false&showDerivedElements=false)
 
 #### Statechart diagram
 
-![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vineland-issue-report/package/issues.uml?showStateMachines=true)
+![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vineland-service-request/package/service_requests.uml?showStateMachines=true)
 
 

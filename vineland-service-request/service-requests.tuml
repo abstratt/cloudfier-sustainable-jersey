@@ -1,0 +1,110 @@
+package service_requests;
+
+import mdd_media;
+
+class ServiceRequest
+    allow SystemAdministrator, CityOfficial read, update, delete, call, static call, extent;
+	allow Resident read, create;
+	allow Resident update { self.resident == (System#user() as Resident) and self.status == Status#Submitted };
+    attribute serviceRequestType : ServiceRequestType;
+    attribute description : Memo;
+    attribute picture : Picture[0,1];
+    readonly attribute reportDate : Date := { Date#today() };
+    readonly attribute resident : Resident := {(System#user() as Resident) };
+    readonly attribute staff : CityOfficial[0,1];    
+    
+    readonly attribute acceptanceDate : Date[0,1];
+    
+    readonly attribute completionDate : Date[0,1];
+    
+    readonly attribute staffComment : String[0,1] := "";
+    
+    static query myRequests() : ServiceRequest[*]
+        allow Resident
+        allow CityOfficial none;
+    begin
+        return ServiceRequest extent.select((i : ServiceRequest) : Boolean { i.resident == (System#user() as Resident) });
+    end;
+    static query toValidate() : ServiceRequest[*];
+    begin
+        return ServiceRequest extent.select((i : ServiceRequest) : Boolean { i.status == Status#Submitted});
+    end;
+    
+    static query toComplete() : ServiceRequest[*];
+    begin
+        return ServiceRequest extent.select((i : ServiceRequest) : Boolean { i.status == Status#Accepted});
+    end;
+
+    static query completed() : ServiceRequest[*];
+    begin
+        return ServiceRequest extent.select((i : ServiceRequest) : Boolean { i.status == Status#Completed});
+    end;
+    
+    static query byResident(resident : Resident) : ServiceRequest[*];
+    begin
+        return ServiceRequest extent.select((i : ServiceRequest) : Boolean { i.resident == resident });
+    end;
+
+
+    attribute location : String[0,1] := "39.4788896,-75.0126185,17";
+    
+    attribute status : Status;
+    operation accept()
+        allow CityOfficial;
+    begin
+        self.staff := (System#user() as CityOfficial);
+    end;
+    
+    operation reject(reason : String)
+        allow CityOfficial;
+    begin
+        self.staffComment := reason;
+        self.staff := (System#user() as CityOfficial);        
+    end;
+
+    operation complete();
+    
+    statemachine Status
+        initial state Submitted
+            transition on call(accept) to Accepted;
+            transition on call(reject) to Invalid;
+        end;
+        state Invalid
+        end;
+        state Accepted
+            entry { self.acceptanceDate := Date#today(); };
+            transition on call(complete) to Completed;        
+        end;
+        state Completed
+            entry { self.completionDate := Date#today(); };
+        end;
+    end;
+end;
+
+role abstract class Person
+    attribute firstName : String;
+    attribute lastName : String;
+end;
+
+class Resident specializes Person
+    allow SystemAdministrator all;
+    allow CityOfficial all;    
+    allow Resident update { (System#user() as Resident) == self };        
+end;
+
+class CityOfficial specializes Person
+    allow SystemAdministrator all;
+    allow CityOfficial update { (System#user() as CityOfficial) == self };    
+end;
+
+class SystemAdministrator specializes Person
+    allow SystemAdministrator all;        
+end;
+
+class ServiceRequestType
+    allow CityOfficial, SystemAdministrator all;
+    allow Resident read, extent;
+    attribute name : String;
+end;
+
+end.

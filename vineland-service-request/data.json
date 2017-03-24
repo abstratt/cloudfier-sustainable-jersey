@@ -77,7 +77,9 @@
     ],
     "ServiceRequest": [
       {
-        "description": "Closed to intersection with Howard St",
+        "reportDate": "2017-03-22",
+        "description": "Near to intersection with Howard St",
+        "status": "Accepted",
         "picture": {
           "token": "e910a813-924c-46e3-b28b-fb09fb376e28",
           "contentLength": 87565,
@@ -85,24 +87,23 @@
           "contentType": "image/jpeg",
           "originalName": "3239250_a4b8c8b8.jpg"
         },
-        "reportDate": "2017-03-22",
+        "location": "+39.481410,-75.011385",
         "staffComment": "",
-        "location": "39.4788896,-75.0126185,17",
-        "status": "Accepted",
         "serviceRequestType": "service_requests.ServiceRequestType@1",
         "resident": "service_requests.Resident@2"
       },
       {
-        "description": "Landis Junior High,",
         "reportDate": "2017-03-22",
-        "staffComment": "already addressed, thank you",
-        "location": "39.4862634,-75.0371985,19",
+        "description": "Landis Junior High,",
         "status": "Invalid",
+        "staffComment": "already addressed, thank you",
         "serviceRequestType": "service_requests.ServiceRequestType@6",
         "resident": "service_requests.Resident@3"
       },
       {
+        "reportDate": "2017-03-22",
         "description": "Most on Stafford Dr",
+        "status": "Submitted",
         "picture": {
           "token": "7210eeff-6663-47dd-bdbd-bf7f03638d29",
           "contentLength": 275361,
@@ -110,15 +111,14 @@
           "contentType": "image/jpeg",
           "originalName": "8027337009_76003c73fe_z.jpg"
         },
-        "reportDate": "2017-03-22",
         "staffComment": "",
-        "location": "39.4779071,-75.0593059,18",
-        "status": "Submitted",
         "serviceRequestType": "service_requests.ServiceRequestType@4",
         "resident": "service_requests.Resident@3"
       },
       {
+        "reportDate": "2017-03-22",
         "description": "Nearby Landis Jr High school parking lot",
+        "status": "Submitted",
         "picture": {
           "token": "8b316810-7ccc-4ef3-9050-a81a4ddd9895",
           "contentLength": 161160,
@@ -126,10 +126,7 @@
           "contentType": "image/jpeg",
           "originalName": "28255487842_3cbbf32dec_z.jpg"
         },
-        "reportDate": "2017-03-22",
         "staffComment": "",
-        "location": "39.4862634,-75.0371985,19",
-        "status": "Submitted",
         "serviceRequestType": "service_requests.ServiceRequestType@2",
         "resident": "service_requests.Resident@1"
       }

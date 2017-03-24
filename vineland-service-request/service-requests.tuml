@@ -7,10 +7,12 @@ class ServiceRequest
 	allow Resident read, create;
 	allow Resident update { self.resident == (System#user() as Resident) and self.status == Status#Submitted };
     attribute serviceRequestType : ServiceRequestType;
-    attribute description : Memo;
-    attribute picture : Picture[0,1];
     readonly attribute reportDate : Date := { Date#today() };
+    attribute description : Memo;
+    attribute status : Status;
     readonly attribute resident : Resident := {(System#user() as Resident) };
+    attribute picture : Picture[0,1];
+    attribute location : Geolocation[0,1];
     readonly attribute staff : CityOfficial[0,1];    
     
     readonly attribute acceptanceDate : Date[0,1];
@@ -18,6 +20,7 @@ class ServiceRequest
     readonly attribute completionDate : Date[0,1];
     
     readonly attribute staffComment : String[0,1] := "";
+    
     
     static query myRequests() : ServiceRequest[*]
         allow Resident
@@ -45,10 +48,6 @@ class ServiceRequest
         return ServiceRequest extent.select((i : ServiceRequest) : Boolean { i.resident == resident });
     end;
 
-
-    attribute location : String[0,1] := "39.4788896,-75.0126185,17";
-    
-    attribute status : Status;
     operation accept()
         allow CityOfficial;
     begin

@@ -1,0 +1,30 @@
+package applications;
+
+role abstract class Person
+    derived attribute fullName : String := { self.lastName + ", " + self.firstName };
+    attribute firstName : String;
+    attribute lastName : String;
+end;
+
+class CityOfficial specializes Person
+    allow SystemAdministrator all;
+    allow CityOfficial update { (System#user() as CityOfficial) == self };    
+end;
+
+class SystemAdministrator specializes Person
+    allow SystemAdministrator all;        
+end;
+
+class Resident specializes Person
+    allow SystemAdministrator all;
+    allow CityOfficial all;    
+    allow Resident update { (System#user() as Resident) == self };        
+    attribute address : String[0,1];
+    attribute city : String[0,1] := "Alexandria";
+    attribute zipCode : String[0,1];    
+    attribute homePhone : String[0,1];   
+    attribute workPhone : String[0,1];
+    attribute emailAddress : String[0,1];    
+end;
+
+end.

@@ -10,22 +10,22 @@ the managing of timelines and workflow, with a GIS component and a tie to tax ma
 
 ## Enhancements/bugs
 
-https://github.com/abstratt/cloudfier-sustainable-jersey/labels/vacant-properties
+https://github.com/abstratt/cloudfier-sustainable-jersey/labels/neptune-vacant-properties
 
 ### Live app
 
-http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-vacant-properties/ (UI)
+http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-neptune-vacant-properties/ (UI)
 
-http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-vacant-properties/ (REST API)
+http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-neptune-vacant-properties/ (REST API)
 
 
 ### Live Diagrams
 
 #### Class diagram
 
-![Class diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vacant-properties/package/vacant_properties.uml?showClassifierCompartments=Always&showStaticFeatures=true&showClasses=true&showAssociationEndName=true&showAttributes=true&showOperations=true&showComments=true&showParameters=true&showAssociationEndMultiplicity=true&showMinimumVisibility=Public&showFeatureVisibility=false&showParameterNames=false&showDerivedElements=false)
+![Class diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-neptune-vacant-properties/package/vacant_properties.uml?showClassifierCompartments=Always&showStaticFeatures=true&showClasses=true&showAssociationEndName=true&showAttributes=true&showOperations=true&showComments=true&showParameters=true&showAssociationEndMultiplicity=true&showMinimumVisibility=Public&showFeatureVisibility=false&showParameterNames=false&showDerivedElements=false)
 
 #### Statechart diagram
 
-![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vacant-properties/package/vacant_properties.uml?showStateMachines=true)
+![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-neptune-vacant-properties/package/vacant_properties.uml?showStateMachines=true)
 

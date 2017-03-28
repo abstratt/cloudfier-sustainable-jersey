@@ -33,4 +33,5 @@ the resident could receive a report back when the issue is resolved.
 
 ![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-vineland-service-request/package/service_requests.uml?showStateMachines=true)
 
+See: [LICENSE](../LICENSE) file (shared by all applications in this repository).
 

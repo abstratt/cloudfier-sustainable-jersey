@@ -27,3 +27,7 @@ problems and come up with solutions.
 ![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-alexandria-forms/package/applications.uml?showStateMachines=true)
 
 
+### License
+
+See: [LICENSE](../LICENSE) file
+

@@ -29,5 +29,5 @@ problems and come up with solutions.
 
 ### License
 
-See: [LICENSE](../LICENSE) file
+See: [LICENSE](../LICENSE) file (shared by all applications in this repository).
 

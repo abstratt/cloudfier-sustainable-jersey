@@ -1,0 +1,193 @@
+{
+	"mnemonicProperty": "username",
+    "concrete": true,
+    "instantiable": true,
+    "standalone": true,
+    "topLevel": true,
+    "role": false,
+    "namespace": "userprofile",
+    "description": "",
+    "label": "Profile",
+    "name": "Profile",
+    "symbol": "Profile",
+    "uri": "${baseUri}entities/userprofile.Profile",
+    "fullName": "userprofile.Profile",
+    "extentUri": "${baseUri}entities/userprofile.Profile/instances/",
+    "entityActionUriTemplate": "${baseUri}entities/userprofile.Profile/actions/(actionName)",
+    "instanceUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)",
+    "instanceActionUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)/actions/(actionName)",
+    "relationshipDomainUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)/relationships/(relationshipName)/domain",
+    "relatedInstancesUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)/relationships/(relationshipName)",
+    "relatedInstanceUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)/relationships/(relationshipName)/(relatedObjectId)",
+    "instanceActionParameterDomainUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)/actions/(actionName)/parameters/(parameterName)/domain",
+    "finderUriTemplate": "${baseUri}entities/userprofile.Profile/finders/(finderName)",
+    "entityCapabilityUri": "${baseUri}entities/userprofile.Profile/capabilities",
+    "instanceCapabilityUriTemplate": "${baseUri}entities/userprofile.Profile/instances/(objectId)/capabilities",
+    "operations" : {
+    },
+    "properties" : {
+        "username" : {
+            "unique": true,
+            "mnemonic": true,
+            "userVisible": true,
+            "derived": false,
+            "editable": false,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "userprofile",
+                "kind": "Entity",
+                "typeName": "Profile",
+                "fullName": "userprofile.Profile"
+            },
+            "description": "Often an email address",
+            "label": "Username",
+            "name": "username",
+            "symbol": "username"
+        }
+        ,
+        "password" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": false,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "userprofile",
+                "kind": "Entity",
+                "typeName": "Profile",
+                "fullName": "userprofile.Profile"
+            },
+            "description": "",
+            "label": "Password",
+            "name": "password",
+            "symbol": "password"
+        }
+    },
+    "relationships" : {
+        "roleAsCityOfficial": {
+          "navigable": true,
+          "opposite": "userProfile",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": false,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": false,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "applications",
+              "kind": "Entity",
+              "typeName": "CityOfficial",
+              "fullName": "applications.CityOfficial"
+          },
+          "owner": {
+              "entityNamespace": "userprofile",
+              "kind": "Entity",
+              "typeName": "Profile",
+              "fullName": "userprofile.Profile"
+          },
+          "description": "",
+          "label": "Role As City Official",
+          "name": "roleAsCityOfficial",
+          "symbol": "roleAsCityOfficial"
+        }
+        ,
+        "roleAsSystemAdministrator": {
+          "navigable": true,
+          "opposite": "userProfile",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": false,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": false,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "applications",
+              "kind": "Entity",
+              "typeName": "SystemAdministrator",
+              "fullName": "applications.SystemAdministrator"
+          },
+          "owner": {
+              "entityNamespace": "userprofile",
+              "kind": "Entity",
+              "typeName": "Profile",
+              "fullName": "userprofile.Profile"
+          },
+          "description": "",
+          "label": "Role As System Administrator",
+          "name": "roleAsSystemAdministrator",
+          "symbol": "roleAsSystemAdministrator"
+        }
+        ,
+        "roleAsResident": {
+          "navigable": true,
+          "opposite": "userProfile",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": false,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": false,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "applications",
+              "kind": "Entity",
+              "typeName": "Resident",
+              "fullName": "applications.Resident"
+          },
+          "owner": {
+              "entityNamespace": "userprofile",
+              "kind": "Entity",
+              "typeName": "Profile",
+              "fullName": "userprofile.Profile"
+          },
+          "description": "",
+          "label": "Role As Resident",
+          "name": "roleAsResident",
+          "symbol": "roleAsResident"
+        }
+    },
+    "superTypes": [
+    ],
+    "subTypes": [
+    ],
+    "orderedDataElements": [
+    	"username",
+    	"password",
+    	"roleAsCityOfficial",
+    	"roleAsSystemAdministrator",
+    	"roleAsResident"
+    ]
+}

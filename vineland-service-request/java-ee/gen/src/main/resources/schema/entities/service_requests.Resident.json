@@ -1,0 +1,133 @@
+{
+	"mnemonicProperty": "firstName",
+    "concrete": true,
+    "instantiable": true,
+    "standalone": true,
+    "topLevel": true,
+    "role": true,
+    "namespace": "service_requests",
+    "description": "",
+    "label": "Resident",
+    "name": "Resident",
+    "symbol": "Resident",
+    "uri": "${baseUri}entities/service_requests.Resident",
+    "fullName": "service_requests.Resident",
+    "extentUri": "${baseUri}entities/service_requests.Resident/instances/",
+    "entityActionUriTemplate": "${baseUri}entities/service_requests.Resident/actions/(actionName)",
+    "instanceUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)",
+    "instanceActionUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)/actions/(actionName)",
+    "relationshipDomainUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)/relationships/(relationshipName)/domain",
+    "relatedInstancesUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)/relationships/(relationshipName)",
+    "relatedInstanceUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)/relationships/(relationshipName)/(relatedObjectId)",
+    "instanceActionParameterDomainUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)/actions/(actionName)/parameters/(parameterName)/domain",
+    "finderUriTemplate": "${baseUri}entities/service_requests.Resident/finders/(finderName)",
+    "entityCapabilityUri": "${baseUri}entities/service_requests.Resident/capabilities",
+    "instanceCapabilityUriTemplate": "${baseUri}entities/service_requests.Resident/instances/(objectId)/capabilities",
+    "operations" : {
+    },
+    "properties" : {
+        "firstName" : {
+            "unique": false,
+            "mnemonic": true,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "Resident",
+                "fullName": "service_requests.Resident"
+            },
+            "description": "",
+            "label": "First Name",
+            "name": "firstName",
+            "symbol": "firstName"
+        }
+        ,
+        "lastName" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "Resident",
+                "fullName": "service_requests.Resident"
+            },
+            "description": "",
+            "label": "Last Name",
+            "name": "lastName",
+            "symbol": "lastName"
+        }
+    },
+    "relationships" : {
+        "userProfile": {
+          "navigable": true,
+          "opposite": "roleAsResident",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": true,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": false,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "userprofile",
+              "kind": "Entity",
+              "typeName": "Profile",
+              "fullName": "userprofile.Profile"
+          },
+          "owner": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "Resident",
+              "fullName": "service_requests.Resident"
+          },
+          "description": "",
+          "label": "User Profile",
+          "name": "userProfile",
+          "symbol": "userProfile"
+        }
+    },
+    "superTypes": [
+    	{
+    	    "entityNamespace": "service_requests",
+    	    "kind": "Entity",
+    	    "typeName": "Person",
+    	    "fullName": "service_requests.Person"
+    	}
+    ],
+    "subTypes": [
+    ],
+    "orderedDataElements": [
+    	"firstName",
+    	"lastName",
+    	"userProfile"
+    ]
+}

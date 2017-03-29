@@ -1,0 +1,598 @@
+{
+	"mnemonicProperty": "serviceRequestType",
+    "concrete": true,
+    "instantiable": true,
+    "standalone": true,
+    "topLevel": true,
+    "role": false,
+    "namespace": "service_requests",
+    "description": "",
+    "label": "Service Request",
+    "name": "ServiceRequest",
+    "symbol": "ServiceRequest",
+    "uri": "${baseUri}entities/service_requests.ServiceRequest",
+    "fullName": "service_requests.ServiceRequest",
+    "extentUri": "${baseUri}entities/service_requests.ServiceRequest/instances/",
+    "entityActionUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/actions/(actionName)",
+    "instanceUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)",
+    "instanceActionUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)/actions/(actionName)",
+    "relationshipDomainUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)/relationships/(relationshipName)/domain",
+    "relatedInstancesUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)/relationships/(relationshipName)",
+    "relatedInstanceUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)/relationships/(relationshipName)/(relatedObjectId)",
+    "instanceActionParameterDomainUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)/actions/(actionName)/parameters/(parameterName)/domain",
+    "finderUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/finders/(finderName)",
+    "entityCapabilityUri": "${baseUri}entities/service_requests.ServiceRequest/capabilities",
+    "instanceCapabilityUriTemplate": "${baseUri}entities/service_requests.ServiceRequest/instances/(objectId)/capabilities",
+    "operations" : {
+        "accept" : {
+            "enabled": true,
+            "instanceOperation": true,
+            "kind": "Action",
+            "parameters": [
+            ],
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Accept",
+            "name": "accept",
+            "symbol": "accept"
+        }
+        ,
+        "reject" : {
+            "enabled": true,
+            "instanceOperation": true,
+            "kind": "Action",
+            "parameters": [
+            	{
+            	    "hasDefault": false,
+            	    "multiple": false,
+            	    "required": true,
+            	    "typeRef": {
+            	        "entityNamespace": "mdd_types",
+            	        "kind": "Primitive",
+            	        "typeName": "String",
+            	        "fullName": "mdd_types.String"
+            	    },
+            	    "owner": {
+            	        "entityNamespace": "service_requests",
+            	        "kind": "Entity",
+            	        "typeName": "ServiceRequest",
+            	        "fullName": "service_requests.ServiceRequest"
+            	    },
+            	    "description": "",
+            	    "label": "Reason",
+            	    "name": "reason",
+            	    "symbol": "reason"
+            	}
+            ],
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Reject",
+            "name": "reject",
+            "symbol": "reject"
+        }
+        ,
+        "complete" : {
+            "enabled": true,
+            "instanceOperation": true,
+            "kind": "Action",
+            "parameters": [
+            ],
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Complete",
+            "name": "complete",
+            "symbol": "complete"
+        }
+        ,
+        "myRequests" : {
+            "enabled": true,
+            "instanceOperation": false,
+            "kind": "Finder",
+            "parameters": [
+            ],
+            "multiple": true,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "My Requests",
+            "name": "myRequests",
+            "symbol": "myRequests"
+        }
+        ,
+        "toValidate" : {
+            "enabled": true,
+            "instanceOperation": false,
+            "kind": "Finder",
+            "parameters": [
+            ],
+            "multiple": true,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "To Validate",
+            "name": "toValidate",
+            "symbol": "toValidate"
+        }
+        ,
+        "toComplete" : {
+            "enabled": true,
+            "instanceOperation": false,
+            "kind": "Finder",
+            "parameters": [
+            ],
+            "multiple": true,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "To Complete",
+            "name": "toComplete",
+            "symbol": "toComplete"
+        }
+        ,
+        "completed" : {
+            "enabled": true,
+            "instanceOperation": false,
+            "kind": "Finder",
+            "parameters": [
+            ],
+            "multiple": true,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Completed",
+            "name": "completed",
+            "symbol": "completed"
+        }
+        ,
+        "byResident" : {
+            "enabled": true,
+            "instanceOperation": false,
+            "kind": "Finder",
+            "parameters": [
+            	{
+            	    "hasDefault": false,
+            	    "multiple": false,
+            	    "required": true,
+            	    "typeRef": {
+            	        "entityNamespace": "service_requests",
+            	        "kind": "Entity",
+            	        "typeName": "Resident",
+            	        "fullName": "service_requests.Resident"
+            	    },
+            	    "owner": {
+            	        "entityNamespace": "service_requests",
+            	        "kind": "Entity",
+            	        "typeName": "ServiceRequest",
+            	        "fullName": "service_requests.ServiceRequest"
+            	    },
+            	    "description": "",
+            	    "label": "Resident",
+            	    "name": "resident",
+            	    "symbol": "resident"
+            	}
+            ],
+            "multiple": true,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "By Resident",
+            "name": "byResident",
+            "symbol": "byResident"
+        }
+    },
+    "properties" : {
+        "reportDate" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": false,
+            "initializable": true,
+            "hasDefault": true,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "Date",
+                "fullName": "mdd_types.Date"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Report Date",
+            "name": "reportDate",
+            "symbol": "reportDate"
+        }
+        ,
+        "description" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "Memo",
+                "fullName": "mdd_types.Memo"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Description",
+            "name": "description",
+            "symbol": "description"
+        }
+        ,
+        "status" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": false,
+            "initializable": false,
+            "hasDefault": false,
+            "enumerationLiterals": {
+                "Submitted": "Submitted",
+                "Invalid": "Invalid",
+                "Accepted": "Accepted",
+                "Completed": "Completed"
+            },
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "service_requests.ServiceRequest",
+                "kind": "Enumeration",
+                "typeName": "Status",
+                "fullName": "service_requests.ServiceRequest.Status"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Status",
+            "name": "status",
+            "symbol": "status"
+        }
+        ,
+        "picture" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_media",
+                "kind": "Blob",
+                "typeName": "Picture",
+                "fullName": "mdd_media.Picture"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Picture",
+            "name": "picture",
+            "symbol": "picture"
+        }
+        ,
+        "location" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "Geolocation",
+                "fullName": "mdd_types.Geolocation"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Location",
+            "name": "location",
+            "symbol": "location"
+        }
+        ,
+        "acceptanceDate" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": false,
+            "initializable": false,
+            "hasDefault": false,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "Date",
+                "fullName": "mdd_types.Date"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Acceptance Date",
+            "name": "acceptanceDate",
+            "symbol": "acceptanceDate"
+        }
+        ,
+        "completionDate" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": false,
+            "initializable": false,
+            "hasDefault": false,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "Date",
+                "fullName": "mdd_types.Date"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Completion Date",
+            "name": "completionDate",
+            "symbol": "completionDate"
+        }
+        ,
+        "staffComment" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": false,
+            "initializable": false,
+            "hasDefault": true,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequest",
+                "fullName": "service_requests.ServiceRequest"
+            },
+            "description": "",
+            "label": "Staff Comment",
+            "name": "staffComment",
+            "symbol": "staffComment"
+        }
+    },
+    "relationships" : {
+        "serviceRequestType": {
+          "navigable": true,
+          "opposite": "",
+          "oppositeRequired": false,
+          "oppositeReadOnly": false,
+          "primary": true,
+          "style": "LINK",
+          "derived": false,
+          "editable": true,
+          "initializable": true,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": true,
+          "typeRef": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "ServiceRequestType",
+              "fullName": "service_requests.ServiceRequestType"
+          },
+          "owner": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "ServiceRequest",
+              "fullName": "service_requests.ServiceRequest"
+          },
+          "description": "",
+          "label": "Service Request Type",
+          "name": "serviceRequestType",
+          "symbol": "serviceRequestType"
+        }
+        ,
+        "resident": {
+          "navigable": true,
+          "opposite": "",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": true,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": true,
+          "userVisible": true,
+          "hasDefault": true,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "Resident",
+              "fullName": "service_requests.Resident"
+          },
+          "owner": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "ServiceRequest",
+              "fullName": "service_requests.ServiceRequest"
+          },
+          "description": "",
+          "label": "Resident",
+          "name": "resident",
+          "symbol": "resident"
+        }
+        ,
+        "staff": {
+          "navigable": true,
+          "opposite": "",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": true,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": false,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "CityOfficial",
+              "fullName": "service_requests.CityOfficial"
+          },
+          "owner": {
+              "entityNamespace": "service_requests",
+              "kind": "Entity",
+              "typeName": "ServiceRequest",
+              "fullName": "service_requests.ServiceRequest"
+          },
+          "description": "",
+          "label": "Staff",
+          "name": "staff",
+          "symbol": "staff"
+        }
+    },
+    "superTypes": [
+    ],
+    "subTypes": [
+    ],
+    "orderedDataElements": [
+    	"serviceRequestType",
+    	"reportDate",
+    	"description",
+    	"status",
+    	"resident",
+    	"picture",
+    	"location",
+    	"staff",
+    	"acceptanceDate",
+    	"completionDate",
+    	"staffComment"
+    ]
+}

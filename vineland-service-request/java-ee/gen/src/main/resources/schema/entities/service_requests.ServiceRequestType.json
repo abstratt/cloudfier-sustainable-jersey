@@ -1,0 +1,66 @@
+{
+	"mnemonicProperty": "name",
+    "concrete": true,
+    "instantiable": true,
+    "standalone": true,
+    "topLevel": true,
+    "role": false,
+    "namespace": "service_requests",
+    "description": "",
+    "label": "Service Request Type",
+    "name": "ServiceRequestType",
+    "symbol": "ServiceRequestType",
+    "uri": "${baseUri}entities/service_requests.ServiceRequestType",
+    "fullName": "service_requests.ServiceRequestType",
+    "extentUri": "${baseUri}entities/service_requests.ServiceRequestType/instances/",
+    "entityActionUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/actions/(actionName)",
+    "instanceUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)",
+    "instanceActionUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)/actions/(actionName)",
+    "relationshipDomainUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)/relationships/(relationshipName)/domain",
+    "relatedInstancesUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)/relationships/(relationshipName)",
+    "relatedInstanceUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)/relationships/(relationshipName)/(relatedObjectId)",
+    "instanceActionParameterDomainUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)/actions/(actionName)/parameters/(parameterName)/domain",
+    "finderUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/finders/(finderName)",
+    "entityCapabilityUri": "${baseUri}entities/service_requests.ServiceRequestType/capabilities",
+    "instanceCapabilityUriTemplate": "${baseUri}entities/service_requests.ServiceRequestType/instances/(objectId)/capabilities",
+    "operations" : {
+    },
+    "properties" : {
+        "name" : {
+            "unique": false,
+            "mnemonic": true,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "service_requests",
+                "kind": "Entity",
+                "typeName": "ServiceRequestType",
+                "fullName": "service_requests.ServiceRequestType"
+            },
+            "description": "",
+            "label": "Name",
+            "name": "name",
+            "symbol": "name"
+        }
+    },
+    "relationships" : {
+    },
+    "superTypes": [
+    ],
+    "subTypes": [
+    ],
+    "orderedDataElements": [
+    	"name"
+    ]
+}

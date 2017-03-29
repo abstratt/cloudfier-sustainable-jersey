@@ -19,9 +19,11 @@ the resident could receive a report back when the issue is resolved.
 
 ### Live app
 
-[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-vineland-service-request/)
+[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-vineland-service-request/) (prototype mode)
 
-[REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-vineland-service-request/)
+[REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-vineland-service-request/) (prototype mode)
+
+[Generated code](java-ee/gen) (Java EE)
 
 ### Live Diagrams
 

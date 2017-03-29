@@ -12,9 +12,11 @@ problems and come up with solutions.
 
 ### Live app
 
-[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/)
+[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode)
 
-[REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/)
+[REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode)
+
+[Generated code](java-ee/gen) (Java EE)
 
 ### Live Diagrams
 

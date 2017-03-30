@@ -1,14 +1,12 @@
 ### Alexandria: Online Public Records and Forms
 
-In an effort to increase citizen participation and make government more
+> In an effort to increase citizen participation and make government more
 efficient, Alexandria needs help digitizing certain public records and bring
 government functions online (i.e. interactive forms, applications, permits,
 service requests, etc.) The Township doesn't have the finances to fix these
 problems and come up with solutions. 
 
-### Impact statement by Alexandria
-
-Provide by Michele Bobrowski, Alexandria:
+### Impact statement
 
 > New Jersey Municipalities face budget shortfalls on a yearly basis. Municipalities  need to make hard decisions when it comes to cutting taxes whether it be a service or an employee in a department. In the meantime, residents want the services to continue because that is what they expect of their government. 
 > 

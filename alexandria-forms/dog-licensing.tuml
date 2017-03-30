@@ -3,8 +3,8 @@ package applications;
 import mdd_media;
 
 association DogLicenseApplicant
-	navigable role dogLicenseApplications : DogLicenseApplication[*]; 
-	role DogLicenseApplication.dogOwner;	
+    navigable role dogLicenseApplications : DogLicenseApplication[*]; 
+    role DogLicenseApplication.dogOwner;    
 end;
 
 class DogLicenseApplication
@@ -16,14 +16,14 @@ class DogLicenseApplication
     
     private derived id attribute internalNumber : Integer;
     derived id attribute number : String := { "DGL" + self.internalNumber };
-	attribute status : Status;
+    attribute status : Status;
     readonly attribute dogOwner : Resident := { (System#user() as Resident )}
         allow Resident read ;
     attribute petName : String;
     readonly attribute datePaid : Date[0,1];
     private derived attribute referenceDate : Date[0,1] := {
         if (self.datePaid == null) then return Date#today() else return self.datePaid;
-	};
+    };
     attribute hair : HairType;
     reference breed : Breed;
     attribute coloring : String;
@@ -33,43 +33,43 @@ class DogLicenseApplication
     private derived attribute ageInYears : Integer := { self.birthDate.difference(self.referenceDate).toYears() };        
     private derived attribute partialAgeInMonths : Integer := { self.birthDate.difference(self.referenceDate).toMonths().modulo(12) };
     derived attribute age : String := {
-    	var partialAgeInMonths, ageInYears;
-    	partialAgeInMonths := self.partialAgeInMonths;
-    	ageInYears := self.ageInYears;    	
-    	if (ageInYears = 0) then
-	        return partialAgeInMonths.toString() + " months"
-    	else
-    	begin
-	        if (partialAgeInMonths = 0) then
-		        return ("" + ageInYears) + " years"
-		    else 
-		        return ("" + ageInYears) + (" years and " + partialAgeInMonths) + " months ";
-	    end;
+        var partialAgeInMonths, ageInYears;
+        partialAgeInMonths := self.partialAgeInMonths;
+        ageInYears := self.ageInYears;        
+        if (ageInYears = 0) then
+            return partialAgeInMonths.toString() + " months"
+        else
+        begin
+            if (partialAgeInMonths = 0) then
+                return ("" + ageInYears) + " years"
+            else 
+                return ("" + ageInYears) + (" years and " + partialAgeInMonths) + " months ";
+        end;
     };
     attribute rabiesCertificate : Picture[0,1];
     derived attribute lateFeeApplies : Boolean := { self.referenceDate > Date#make(self.referenceDate.year(), 4, 1)};
     private derived attribute lateFee : Double := {
-    	if (not self.lateFeeApplies) then
-    	    return 0.0
-    	else 
-    	begin
-	    	if (self.neutered) then
-	    	    return 10.0
-	    	else
-	    	    return 13.0;
-    	end;
+        if (not self.lateFeeApplies) then
+            return 0.0
+        else 
+        begin
+            if (self.neutered) then
+                return 10.0
+            else
+                return 13.0;
+        end;
 
-	};
-	
-    private derived attribute baseFee : Double := {
-    	if (self.neutered) then
-    	    return 8.0
-    	else
-    	    return 11.0;
     };
-	
+    
+    private derived attribute baseFee : Double := {
+        if (self.neutered) then
+            return 8.0
+        else
+            return 11.0;
+    };
+    
     derived attribute requiredFee : Double := {
-    	self.baseFee + self.lateFee
+        self.baseFee + self.lateFee
     };
     
     readonly attribute paymentReceived : Double := 0.0;
@@ -98,38 +98,38 @@ class DogLicenseApplication
         }); 
     end;
 
-	operation submit()
-	    precondition RabiesCertificateRecordMustBeAttached { not (self.rabiesCertificate == null) }
-	    allow Resident call;
-	operation receivePayment();
-	begin
-	    self.paymentReceived := self.requiredFee;
-	    self.datePaid := Date#today();
-	end;
-	operation reject();
-	operation approve();	
-	operation cancel();	
-	statemachine Status
-		initial state Draft
-			transition on call(submit) to Submitted;
-			transition on call(cancel) to Canceled;
-		end;
-		state Submitted
-			transition on call(receivePayment) to Paid;
-			transition on call(cancel) to Canceled;
-		end;
-		state Paid
-			transition on call(reject) to Rejected;
-			transition on call(approve) to Approved;
-		end;
-		state Approved
-		end;
-		state Rejected
-		end;
-		state Canceled end;
-	end;
-	
-	
+    operation submit()
+        precondition RabiesCertificateRecordMustBeAttached { not (self.rabiesCertificate == null) }
+        allow Resident call;
+    operation receivePayment();
+    begin
+        self.paymentReceived := self.requiredFee;
+        self.datePaid := Date#today();
+    end;
+    operation reject();
+    operation approve();    
+    operation cancel();    
+    statemachine Status
+        initial state Draft
+            transition on call(submit) to Submitted;
+            transition on call(cancel) to Canceled;
+        end;
+        state Submitted
+            transition on call(receivePayment) to Paid;
+            transition on call(cancel) to Canceled;
+        end;
+        state Paid
+            transition on call(reject) to Rejected;
+            transition on call(approve) to Approved;
+        end;
+        state Approved
+        end;
+        state Rejected
+        end;
+        state Canceled end;
+    end;
+    
+    
     static query dogOwners() : Resident[*];
     begin
         return DogLicenseApplication extent.collect((i : DogLicenseApplication) : Resident { i.dogOwner });

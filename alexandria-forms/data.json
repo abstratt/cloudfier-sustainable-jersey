@@ -24,6 +24,14 @@
       {
         "username": "kmarx",
         "password": "pass"
+      },
+      {
+        "username": "resident1",
+        "password": "pass"
+      },
+      {
+        "username": "staff1",
+        "password": "pass"
       }
     ]
   },
@@ -671,6 +679,12 @@
         "firstName": "John",
         "lastName": "Anderson",
         "city": "Alexandria"
+      },
+      {
+        "firstName": "Resident",
+        "lastName": "One",
+        "city": "Alexandria",
+        "userProfile": "userprofile.Profile@7"        
       }
     ],
     "DogLicenseApplication": [
@@ -758,6 +772,11 @@
         "firstName": "Thomas",
         "lastName": "Kuhn",
         "userProfile": "userprofile.Profile@3"
+      },
+      {
+        "firstName": "Staff",
+        "lastName": "One",
+        "userProfile": "userprofile.Profile@8"
       }
     ]
   }

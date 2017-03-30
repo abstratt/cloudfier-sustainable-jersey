@@ -108,7 +108,7 @@ class DogLicenseApplication
 
     derived attribute requiredFee : Double := { self.baseFee + self.lateFee };
 
-    readonly attribute paymentReceived : Double := 0.0;
+    readonly attribute paymentReceived : Double[0,1] := 0.0;
 
     static query myRequests() : DogLicenseApplication[*]
         allow Resident

@@ -20,6 +20,10 @@
       {
         "username": "kmarx",
         "password": "pass"
+      },
+      {
+        "username": "tkuhn",
+        "password": "pass"
       }
     ]
   },
@@ -36,7 +40,12 @@
         "firstName": "Immanuel",
         "lastName": "Kant",
         "userProfile": "userprofile.Profile@2"
-      }
+      },
+      {
+        "firstName": "Thomas",
+        "lastName": "Kuhn",
+        "userProfile": "userprofile.Profile@6"
+      }      
     ],
     "Resident": [
       {

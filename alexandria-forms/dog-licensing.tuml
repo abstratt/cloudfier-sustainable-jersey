@@ -3,151 +3,209 @@ package applications;
 import mdd_media;
 
 association DogLicenseApplicant
-    navigable role dogLicenseApplications : DogLicenseApplication[*]; 
-    role DogLicenseApplication.dogOwner;    
+
+    navigable role dogLicenseApplications : DogLicenseApplication[*];
+
+    role DogLicenseApplication.dogOwner;
+
 end;
 
 class DogLicenseApplication
+
     allow SystemAdministrator all;
-    allow CityOfficial create, read, update, call, static call;    
+
+    allow CityOfficial create, read, update, call, static call;
+
     allow Resident create;
-    allow Resident read { (System#user() as Resident) == self.dogOwner };    
-    allow Resident update { (System#user() as Resident) == self.dogOwner and (self.status < Status#Submitted) };  
-    
-    private derived id attribute internalNumber : Integer;
-    derived id attribute number : String := { "DGL" + self.internalNumber };
-    attribute status : Status;
-    readonly attribute dogOwner : Resident := { (System#user() as Resident )}
-        allow Resident read ;
-    attribute petName : String;
-    readonly attribute datePaid : Date[0,1];
-    private derived attribute referenceDate : Date[0,1] := {
-        if (self.datePaid == null) then return Date#today() else return self.datePaid;
+
+    allow Resident read{ (System#user() as Resident) == self.dogOwner };
+
+    allow Resident update{
+        (System#user() as Resident) == self.dogOwner and (self.status < Status#Submitted)
     };
+
+    private derived id attribute internalNumber : Integer;
+
+    derived id attribute number : String := { "DGL" + self.internalNumber };
+
+    attribute status : Status;
+
+    readonly attribute dogOwner : Resident := {
+        (System#user() as Resident)
+    }
+        allow Resident read;
+
+    attribute petName : String;
+
+    readonly attribute datePaid : Date[0, 1];
+
+    private derived attribute referenceDate : Date[0, 1] := {
+        if (self.datePaid == null) then
+            return Date#today()
+        else
+            return self.datePaid;
+    };
+
     attribute hair : HairType;
+
     reference breed : Breed;
+
     attribute coloring : String;
+
     attribute sex : Gender;
+
     attribute neutered : Boolean;
+
     attribute birthDate : Date;
-    private derived attribute ageInYears : Integer := { self.birthDate.difference(self.referenceDate).toYears() };        
-    private derived attribute partialAgeInMonths : Integer := { self.birthDate.difference(self.referenceDate).toMonths().modulo(12) };
+
+    private derived attribute ageInYears : Integer := {
+        self.birthDate.difference(self.referenceDate).toYears()
+    };
+
+    private derived attribute partialAgeInMonths : Integer := {
+        self.birthDate.difference(self.referenceDate).toMonths().modulo(12)
+    };
+
     derived attribute age : String := {
         var partialAgeInMonths, ageInYears;
         partialAgeInMonths := self.partialAgeInMonths;
-        ageInYears := self.ageInYears;        
+        ageInYears := self.ageInYears;
         if (ageInYears = 0) then
             return partialAgeInMonths.toString() + " months"
         else
         begin
             if (partialAgeInMonths = 0) then
                 return ("" + ageInYears) + " years"
-            else 
+            else
                 return ("" + ageInYears) + (" years and " + partialAgeInMonths) + " months ";
         end;
     };
-    attribute rabiesCertificate : Picture[0,1];
-    derived attribute lateFeeApplies : Boolean := { self.referenceDate > Date#make(self.referenceDate.year(), 4, 1)};
+
+    attribute rabiesCertificate : Picture[0, 1];
+
+    derived attribute lateFeeApplies : Boolean := {
+        self.referenceDate > Date#make(self.referenceDate.year(), 4, 1)
+    };
+
     private derived attribute lateFee : Double := {
         if (not self.lateFeeApplies) then
             return 0.0
-        else 
+        else
         begin
             if (self.neutered) then
                 return 10.0
             else
                 return 13.0;
         end;
-
     };
-    
+
     private derived attribute baseFee : Double := {
         if (self.neutered) then
             return 8.0
         else
             return 11.0;
     };
-    
-    derived attribute requiredFee : Double := {
-        self.baseFee + self.lateFee
-    };
-    
+
+    derived attribute requiredFee : Double := { self.baseFee + self.lateFee };
+
     readonly attribute paymentReceived : Double := 0.0;
-    
+
     static query myRequests() : DogLicenseApplication[*]
         allow Resident
-        allow CityOfficial { false };
+        allow CityOfficial{ false };
     begin
-        return DogLicenseApplication extent.select((i : DogLicenseApplication) : Boolean { i.dogOwner == (System#user() as Resident) });
+        return DogLicenseApplication extent.select((i : DogLicenseApplication) : Boolean {
+            i.dogOwner == (System#user() as Resident)
+        });
     end;
 
     static query pendingPayment() : DogLicenseApplication[*];
     begin
-        return DogLicenseApplication extent.select((i : DogLicenseApplication) : Boolean { i.status == Status#Submitted });
+        return DogLicenseApplication extent.select((i : DogLicenseApplication) : Boolean {
+            i.status == Status#Submitted
+        });
     end;
 
     static query pendingApproval() : DogLicenseApplication[*];
     begin
-        return DogLicenseApplication extent.select((i : DogLicenseApplication) : Boolean { i.status == Status#Paid });
+        return DogLicenseApplication extent.select((i : DogLicenseApplication) : Boolean {
+            i.status == Status#Paid
+        });
     end;
-    
+
     static query paidWithinPeriod(start : Date[0, 1], end_ : Date[0, 1]) : DogLicenseApplication[*];
     begin
         return DogLicenseApplication extent.select((e : DogLicenseApplication) : Boolean {
             e.status >= Status#Paid and (start == null or e.datePaid >= start) and (end_ == null or e.datePaid <= end_)
-        }); 
+        });
     end;
 
     operation submit()
-        precondition RabiesCertificateRecordMustBeAttached { not (self.rabiesCertificate == null) }
+        precondition RabiesCertificateRecordMustBeAttached {
+            not (self.rabiesCertificate == null)
+        }
         allow Resident call;
+
     operation receivePayment();
     begin
         self.paymentReceived := self.requiredFee;
         self.datePaid := Date#today();
     end;
+
     operation reject();
-    operation approve();    
-    operation cancel();    
+
+    operation approve();
+
+    operation cancel();
+
     statemachine Status
+
         initial state Draft
             transition on call(submit) to Submitted;
             transition on call(cancel) to Canceled;
         end;
+
         state Submitted
             transition on call(receivePayment) to Paid;
             transition on call(cancel) to Canceled;
         end;
+
         state Paid
             transition on call(reject) to Rejected;
             transition on call(approve) to Approved;
         end;
-        state Approved
-        end;
-        state Rejected
-        end;
-        state Canceled end;
-    end;
-    
-    
-    static query dogOwners() : Resident[*];
-    begin
-        return DogLicenseApplication extent.collect((i : DogLicenseApplication) : Resident { i.dogOwner });
-    end;
 
+        state Approved end;
+
+        state Rejected end;
+
+        state Canceled end;
+
+    end;
 end;
 
 enumeration HairType
-    Short; Medium; Long;
+
+    Short;
+
+    Medium;
+
+    Long;
 end;
 
 enumeration Gender
-    Male; Female;
+
+    Male;
+
+    Female;
 end;
 
 class Breed
+
     allow SystemAdministrator, CityOfficial all;
+
     allow Resident extent;
+
     attribute breed : String;
 end;
 

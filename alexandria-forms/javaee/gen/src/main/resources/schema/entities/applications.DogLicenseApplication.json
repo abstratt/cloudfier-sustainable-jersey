@@ -42,24 +42,6 @@
             "symbol": "submit"
         }
         ,
-        "receivePayment" : {
-            "enabled": true,
-            "instanceOperation": true,
-            "kind": "Action",
-            "parameters": [
-            ],
-            "owner": {
-                "entityNamespace": "applications",
-                "kind": "Entity",
-                "typeName": "DogLicenseApplication",
-                "fullName": "applications.DogLicenseApplication"
-            },
-            "description": "",
-            "label": "Receive Payment",
-            "name": "receivePayment",
-            "symbol": "receivePayment"
-        }
-        ,
         "reject" : {
             "enabled": true,
             "instanceOperation": true,
@@ -96,7 +78,7 @@
             "symbol": "approve"
         }
         ,
-        "cancel" : {
+        "receivePayment" : {
             "enabled": true,
             "instanceOperation": true,
             "kind": "Action",
@@ -109,9 +91,45 @@
                 "fullName": "applications.DogLicenseApplication"
             },
             "description": "",
-            "label": "Cancel",
-            "name": "cancel",
-            "symbol": "cancel"
+            "label": "Receive Payment",
+            "name": "receivePayment",
+            "symbol": "receivePayment"
+        }
+        ,
+        "withdraw" : {
+            "enabled": true,
+            "instanceOperation": true,
+            "kind": "Action",
+            "parameters": [
+            ],
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "DogLicenseApplication",
+                "fullName": "applications.DogLicenseApplication"
+            },
+            "description": "",
+            "label": "Withdraw",
+            "name": "withdraw",
+            "symbol": "withdraw"
+        }
+        ,
+        "reactivate" : {
+            "enabled": true,
+            "instanceOperation": true,
+            "kind": "Action",
+            "parameters": [
+            ],
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "DogLicenseApplication",
+                "fullName": "applications.DogLicenseApplication"
+            },
+            "description": "",
+            "label": "Reactivate",
+            "name": "reactivate",
+            "symbol": "reactivate"
         }
         ,
         "myRequests" : {
@@ -260,32 +278,6 @@
             "name": "paidWithinPeriod",
             "symbol": "paidWithinPeriod"
         }
-        ,
-        "dogOwners" : {
-            "enabled": true,
-            "instanceOperation": false,
-            "kind": "Finder",
-            "parameters": [
-            ],
-            "multiple": true,
-            "required": false,
-            "typeRef": {
-                "entityNamespace": "applications",
-                "kind": "Entity",
-                "typeName": "Resident",
-                "fullName": "applications.Resident"
-            },
-            "owner": {
-                "entityNamespace": "applications",
-                "kind": "Entity",
-                "typeName": "DogLicenseApplication",
-                "fullName": "applications.DogLicenseApplication"
-            },
-            "description": "",
-            "label": "Dog Owners",
-            "name": "dogOwners",
-            "symbol": "dogOwners"
-        }
     },
     "properties" : {
         "internalNumber" : {
@@ -358,7 +350,7 @@
                 "Paid": "Paid",
                 "Approved": "Approved",
                 "Rejected": "Rejected",
-                "Canceled": "Canceled"
+                "Withdrawn": "Withdrawn"
             },
             "multiple": false,
             "required": false,
@@ -464,6 +456,34 @@
             "symbol": "referenceDate"
         }
         ,
+        "ownApplication" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": false,
+            "derived": true,
+            "editable": false,
+            "initializable": false,
+            "hasDefault": true,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "Boolean",
+                "fullName": "mdd_types.Boolean"
+            },
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "DogLicenseApplication",
+                "fullName": "applications.DogLicenseApplication"
+            },
+            "description": "",
+            "label": "Own Application",
+            "name": "ownApplication",
+            "symbol": "ownApplication"
+        }
+        ,
         "hair" : {
             "unique": false,
             "mnemonic": false,
@@ -564,7 +584,7 @@
             "derived": false,
             "editable": true,
             "initializable": true,
-            "hasDefault": false,
+            "hasDefault": true,
             "multiple": false,
             "required": true,
             "typeRef": {
@@ -702,8 +722,8 @@
             "mnemonic": false,
             "userVisible": true,
             "derived": false,
-            "editable": true,
-            "initializable": true,
+            "editable": false,
+            "initializable": false,
             "hasDefault": false,
             "multiple": false,
             "required": false,
@@ -843,7 +863,7 @@
             "userVisible": true,
             "derived": false,
             "editable": false,
-            "initializable": true,
+            "initializable": false,
             "hasDefault": true,
             "multiple": false,
             "required": false,
@@ -943,6 +963,7 @@
     	"petName",
     	"datePaid",
     	"referenceDate",
+    	"ownApplication",
     	"hair",
     	"breed",
     	"coloring",

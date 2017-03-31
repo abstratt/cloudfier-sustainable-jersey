@@ -35,7 +35,7 @@ import util.SecurityHelper;
 
 @Priority(Priorities.AUTHORIZATION)
 public class StandaloneRequestResponseFilter implements ContainerRequestFilter, ContainerResponseFilter {
-	private static final boolean LOGIN_REQUIRED = false;
+	private static final boolean LOGIN_REQUIRED = true;
 	private static final Collection<String> MUTATION_METHODS = Arrays.asList("PUT", "POST", "DELETE");
 	private EntityManagerFactory entityManagerFactory;
 

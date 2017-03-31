@@ -48,7 +48,6 @@ public class DogLicenseApplicationCRUDTest {
         toCreate.setHair(HairType.Short);
         toCreate.setColoring("");
         toCreate.setSex(Gender.Male);
-        toCreate.setNeutered(false);
         toCreate.setBirthDate(new Timestamp(System.currentTimeMillis()));
         DogLicenseApplication created = dogLicenseApplicationService.create(toCreate);
         Object id = created.getId();
@@ -62,7 +61,6 @@ public class DogLicenseApplicationCRUDTest {
         assertEquals(created.getHair(), retrieved.getHair());
         assertEquals(created.getColoring(), retrieved.getColoring());
         assertEquals(created.getSex(), retrieved.getSex());
-        assertEquals(created.isNeutered(), retrieved.isNeutered());
         assertTrue((created.getBirthDate().getTime() - retrieved.getBirthDate().getTime()) < 10000);
     }
     @Test
@@ -73,7 +71,6 @@ public class DogLicenseApplicationCRUDTest {
         toCreate1.setHair(HairType.Short);
         toCreate1.setColoring("");
         toCreate1.setSex(Gender.Male);
-        toCreate1.setNeutered(false);
         toCreate1.setBirthDate(new Timestamp(System.currentTimeMillis()));
         dogLicenseApplicationService.create(toCreate1);
         DogLicenseApplication toCreate2 = new DogLicenseApplication();
@@ -82,7 +79,6 @@ public class DogLicenseApplicationCRUDTest {
         toCreate2.setHair(HairType.Short);
         toCreate2.setColoring("");
         toCreate2.setSex(Gender.Male);
-        toCreate2.setNeutered(false);
         toCreate2.setBirthDate(new Timestamp(System.currentTimeMillis()));
         dogLicenseApplicationService.create(toCreate2);
         PersistenceHelper.flush(true);
@@ -102,7 +98,6 @@ public class DogLicenseApplicationCRUDTest {
         toCreate.setHair(HairType.Short);
         toCreate.setColoring("");
         toCreate.setSex(Gender.Male);
-        toCreate.setNeutered(false);
         toCreate.setBirthDate(new Timestamp(System.currentTimeMillis()));
         Object id = dogLicenseApplicationService.create(toCreate).getId();
         PersistenceHelper.flush(true);
@@ -122,7 +117,6 @@ public class DogLicenseApplicationCRUDTest {
         toDelete.setHair(HairType.Short);
         toDelete.setColoring("");
         toDelete.setSex(Gender.Male);
-        toDelete.setNeutered(false);
         toDelete.setBirthDate(new Timestamp(System.currentTimeMillis()));
         Object id = dogLicenseApplicationService.create(toDelete).getId();
         assertNotNull(dogLicenseApplicationService.find(id));

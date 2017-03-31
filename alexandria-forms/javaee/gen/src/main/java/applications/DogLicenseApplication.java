@@ -120,12 +120,12 @@ public class DogLicenseApplication {
         this.rabiesCertificate = newRabiesCertificate;
     }
     
-    protected double paymentReceived = 0.0;
-    @Column(nullable=false)
-    public double getPaymentReceived() {
+    protected Double paymentReceived = 0.0;
+    @Column
+    public Double getPaymentReceived() {
         return this.paymentReceived;
     }
-    public void setPaymentReceived(double newPaymentReceived) {
+    public void setPaymentReceived(Double newPaymentReceived) {
         this.paymentReceived = newPaymentReceived;
     }
     /*************************** SEQUENCE ***************************/
@@ -162,19 +162,22 @@ public class DogLicenseApplication {
         }
         this.handleEvent(StatusEvent.Submit);
     }
-    public void receivePayment() {
-        this.setPaymentReceived(this.getRequiredFee());
-        this.setDatePaid(java.sql.Date.valueOf(java.time.LocalDate.now()));
-        this.handleEvent(StatusEvent.ReceivePayment);
-    }
     public void reject() {
         this.handleEvent(StatusEvent.Reject);
     }
     public void approve() {
         this.handleEvent(StatusEvent.Approve);
     }
-    public void cancel() {
-        this.handleEvent(StatusEvent.Cancel);
+    public void receivePayment() {
+        this.setPaymentReceived(this.getRequiredFee());
+        this.setDatePaid(java.sql.Date.valueOf(java.time.LocalDate.now()));
+        this.handleEvent(StatusEvent.ReceivePayment);
+    }
+    public void withdraw() {
+        this.handleEvent(StatusEvent.Withdraw);
+    }
+    public void reactivate() {
+        this.handleEvent(StatusEvent.Reactivate);
     }
     /**
      * Is the Submit action enabled at this time?
@@ -187,17 +190,6 @@ public class DogLicenseApplication {
          if ( (this.getRabiesCertificate() == null)) {
              return false;
          }
-         return true;
-     }
-    
-    /**
-     * Is the ReceivePayment action enabled at this time?
-     */
-     @Transient
-     public boolean isReceivePaymentActionEnabled() {
-     	if (getStatus() != DogLicenseApplication.Status.Submitted) {
-     		return false;
-     	}
          return true;
      }
     
@@ -224,11 +216,33 @@ public class DogLicenseApplication {
      }
     
     /**
-     * Is the Cancel action enabled at this time?
+     * Is the ReceivePayment action enabled at this time?
      */
      @Transient
-     public boolean isCancelActionEnabled() {
-     	if (!EnumSet.of(DogLicenseApplication.Status.Draft, DogLicenseApplication.Status.Submitted).contains(getStatus())) {
+     public boolean isReceivePaymentActionEnabled() {
+     	if (getStatus() != DogLicenseApplication.Status.Submitted) {
+     		return false;
+     	}
+         return true;
+     }
+    
+    /**
+     * Is the Withdraw action enabled at this time?
+     */
+     @Transient
+     public boolean isWithdrawActionEnabled() {
+     	if (getStatus() != DogLicenseApplication.Status.Submitted) {
+     		return false;
+     	}
+         return true;
+     }
+    
+    /**
+     * Is the Reactivate action enabled at this time?
+     */
+     @Transient
+     public boolean isReactivateActionEnabled() {
+     	if (getStatus() != DogLicenseApplication.Status.Withdrawn) {
      		return false;
      	}
          return true;
@@ -247,6 +261,11 @@ public class DogLicenseApplication {
         } else  {
             return this.getDatePaid();
         }
+    }
+    
+    @Transient
+    public boolean isOwnApplication() {
+        return this.getDogOwner().getId().equals(asResident(getCurrentProfile()).getId());
     }
     
     @Transient
@@ -284,13 +303,21 @@ public class DogLicenseApplication {
         if (! this.isLateFeeApplies()) {
             return 0.0;
         } else  {
-            java.lang.NullPointerException;
+            if (this.isNeutered()) {
+                return 10.0;
+            } else  {
+                return 13.0;
+            }
         }
     }
     
     @Transient
     public double getBaseFee() {
-        java.lang.NullPointerException;
+        if (this.isNeutered()) {
+            return 8.0;
+        } else  {
+            return 11.0;
+        }
     }
     
     @Transient
@@ -306,10 +333,6 @@ public class DogLicenseApplication {
                     case Submit :
                         doTransitionTo(instance, Submitted);
                         break;
-                    
-                    case Cancel :
-                        doTransitionTo(instance, Canceled);
-                        break;
                     default : break; /* unexpected events are silently ignored */ 
                 }
             }                       
@@ -321,8 +344,8 @@ public class DogLicenseApplication {
                         doTransitionTo(instance, Paid);
                         break;
                     
-                    case Cancel :
-                        doTransitionTo(instance, Canceled);
+                    case Withdraw :
+                        doTransitionTo(instance, Withdrawn);
                         break;
                     default : break; /* unexpected events are silently ignored */ 
                 }
@@ -352,9 +375,14 @@ public class DogLicenseApplication {
                 /* this is a final state */
             }                       
         },
-        Canceled {
+        Withdrawn {
             @Override void handleEvent(DogLicenseApplication instance, StatusEvent event) {
-                /* this is a final state */
+                switch (event) {
+                    case Reactivate :
+                        doTransitionTo(instance, Draft);
+                        break;
+                    default : break; /* unexpected events are silently ignored */ 
+                }
             }                       
         };
         void onEntry(DogLicenseApplication instance) {
@@ -379,10 +407,11 @@ public class DogLicenseApplication {
     
     public enum StatusEvent {
         Submit,
-        Cancel,
         ReceivePayment,
+        Withdraw,
         Reject,
-        Approve
+        Approve,
+        Reactivate
     }
     
     public void handleEvent(StatusEvent event) {
@@ -407,12 +436,6 @@ public class DogLicenseApplication {
             return true;
         }
         /**
-         * Is the 'receivePayment' action allowed for the given CityOfficial?
-         */
-        public static boolean isReceivePaymentAllowedFor(CityOfficial subject, DogLicenseApplication target) {
-            return true;
-        }
-        /**
          * Is the 'reject' action allowed for the given CityOfficial?
          */
         public static boolean isRejectAllowedFor(CityOfficial subject, DogLicenseApplication target) {
@@ -425,10 +448,22 @@ public class DogLicenseApplication {
             return true;
         }
         /**
-         * Is the 'cancel' action allowed for the given CityOfficial?
+         * Is the 'receivePayment' action allowed for the given CityOfficial?
          */
-        public static boolean isCancelAllowedFor(CityOfficial subject, DogLicenseApplication target) {
+        public static boolean isReceivePaymentAllowedFor(CityOfficial subject, DogLicenseApplication target) {
             return true;
+        }
+        /**
+         * Is the 'withdraw' action allowed for the given CityOfficial?
+         */
+        public static boolean isWithdrawAllowedFor(CityOfficial subject, DogLicenseApplication target) {
+            return false;
+        }
+        /**
+         * Is the 'reactivate' action allowed for the given CityOfficial?
+         */
+        public static boolean isReactivateAllowedFor(CityOfficial subject, DogLicenseApplication target) {
+            return false;
         }
         public static boolean canRead(SystemAdministrator subject, DogLicenseApplication target) {
             return true;
@@ -446,12 +481,6 @@ public class DogLicenseApplication {
             return true;
         }
         /**
-         * Is the 'receivePayment' action allowed for the given SystemAdministrator?
-         */
-        public static boolean isReceivePaymentAllowedFor(SystemAdministrator subject, DogLicenseApplication target) {
-            return true;
-        }
-        /**
          * Is the 'reject' action allowed for the given SystemAdministrator?
          */
         public static boolean isRejectAllowedFor(SystemAdministrator subject, DogLicenseApplication target) {
@@ -464,9 +493,21 @@ public class DogLicenseApplication {
             return true;
         }
         /**
-         * Is the 'cancel' action allowed for the given SystemAdministrator?
+         * Is the 'receivePayment' action allowed for the given SystemAdministrator?
          */
-        public static boolean isCancelAllowedFor(SystemAdministrator subject, DogLicenseApplication target) {
+        public static boolean isReceivePaymentAllowedFor(SystemAdministrator subject, DogLicenseApplication target) {
+            return true;
+        }
+        /**
+         * Is the 'withdraw' action allowed for the given SystemAdministrator?
+         */
+        public static boolean isWithdrawAllowedFor(SystemAdministrator subject, DogLicenseApplication target) {
+            return true;
+        }
+        /**
+         * Is the 'reactivate' action allowed for the given SystemAdministrator?
+         */
+        public static boolean isReactivateAllowedFor(SystemAdministrator subject, DogLicenseApplication target) {
             return true;
         }
         public static boolean canRead(Resident subject, DogLicenseApplication target) {
@@ -476,13 +517,25 @@ public class DogLicenseApplication {
             return subject.getId().equals(target.getDogOwner().getId()) && target.getStatus().compareTo(DogLicenseApplication.Status.Submitted) < 0;
         }
         public static boolean canDelete(Resident subject, DogLicenseApplication target) {
-            return false;
+            return subject.getId().equals(target.getDogOwner().getId()) && target.getStatus().compareTo(DogLicenseApplication.Status.Submitted) < 0;
         }
         /**
          * Is the 'submit' action allowed for the given Resident?
          */
         public static boolean isSubmitAllowedFor(Resident subject, DogLicenseApplication target) {
-            return true;
+            return target.isOwnApplication();
+        }
+        /**
+         * Is the 'withdraw' action allowed for the given Resident?
+         */
+        public static boolean isWithdrawAllowedFor(Resident subject, DogLicenseApplication target) {
+            return target.isOwnApplication();
+        }
+        /**
+         * Is the 'reactivate' action allowed for the given Resident?
+         */
+        public static boolean isReactivateAllowedFor(Resident subject, DogLicenseApplication target) {
+            return target.isOwnApplication();
         }
     }
     

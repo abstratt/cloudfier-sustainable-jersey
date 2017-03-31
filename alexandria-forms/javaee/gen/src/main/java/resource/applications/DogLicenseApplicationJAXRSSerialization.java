@@ -45,6 +45,7 @@ public class DogLicenseApplicationJAXRSSerialization {
                 values.put("internalNumber", toRender.getInternalNumber());
                 values.put("number", stringEncoder.apply(toRender.getNumber()));
                 values.put("referenceDate", toRender.getReferenceDate() == null ? null : dateFormat.format(toRender.getReferenceDate()));
+                values.put("ownApplication", toRender.isOwnApplication());
                 values.put("ageInYears", toRender.getAgeInYears());
                 values.put("partialAgeInMonths", toRender.getPartialAgeInMonths());
                 values.put("age", stringEncoder.apply(toRender.getAge()));
@@ -56,6 +57,7 @@ public class DogLicenseApplicationJAXRSSerialization {
                 values.put("internalNumber", 0L);
                 values.put("number", "");
                 values.put("referenceDate", new Date());
+                values.put("ownApplication", false);
                 values.put("ageInYears", 0L);
                 values.put("partialAgeInMonths", 0L);
                 values.put("age", "");
@@ -94,14 +96,16 @@ public class DogLicenseApplicationJAXRSSerialization {
             Map<String, String> disabledActions = new LinkedHashMap<>();
             if (!toRender.isSubmitActionEnabled())
                 disabledActions.put("submit", "");
-            if (!toRender.isReceivePaymentActionEnabled())
-                disabledActions.put("receivePayment", "");
             if (!toRender.isRejectActionEnabled())
                 disabledActions.put("reject", "");
             if (!toRender.isApproveActionEnabled())
                 disabledActions.put("approve", "");
-            if (!toRender.isCancelActionEnabled())
-                disabledActions.put("cancel", "");
+            if (!toRender.isReceivePaymentActionEnabled())
+                disabledActions.put("receivePayment", "");
+            if (!toRender.isWithdrawActionEnabled())
+                disabledActions.put("withdraw", "");
+            if (!toRender.isReactivateActionEnabled())
+                disabledActions.put("reactivate", "");
             result.put("disabledActions", disabledActions);
         }
         Map<String, Object> resultTypeRef = new LinkedHashMap<>();
@@ -149,7 +153,6 @@ public class DogLicenseApplicationJAXRSSerialization {
         }
         
         toUpdate.setRabiesCertificate((String) values.get("rabiesCertificate"));
-        toUpdate.setPaymentReceived(Double.parseDouble(values.get("paymentReceived").toString()));
         
         Map<String, Map<String, Object>> links = (Map<String, Map<String, Object>>) external.get("links");
         Map<String, Object> dogOwner = links.get("dogOwner");

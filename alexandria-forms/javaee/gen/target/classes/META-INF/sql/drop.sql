@@ -1,1 +1,0 @@
-DROP SCHEMA IF EXISTS alexandria_forms CASCADE;

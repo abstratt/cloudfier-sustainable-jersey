@@ -133,10 +133,4 @@ public class DogLicenseApplicationService {
             "SELECT DISTINCT dogLicenseApplication_ FROM DogLicenseApplication dogLicenseApplication_ WHERE dogLicenseApplication_.status >= 'Paid' AND (:start IS NULL OR dogLicenseApplication_.datePaid >= :start) AND (:end_ IS NULL OR dogLicenseApplication_.datePaid <= :end_)", DogLicenseApplication.class
         ).setParameter("start", start).setParameter("end_", end_).getResultList();
     }
-    
-    public Collection<Resident> dogOwners() {
-        return getEntityManager().createQuery(
-            "SELECT dogLicenseApplication_.dogOwner FROM DogLicenseApplication dogLicenseApplication_", Resident.class
-        ).getResultList();
-    }
 }

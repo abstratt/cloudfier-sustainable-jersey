@@ -4,12 +4,14 @@ INSERT INTO alexandria_forms.Profile (id, username, password) VALUES (3, 'tkuhn'
 INSERT INTO alexandria_forms.Profile (id, username, password) VALUES (4, 'jlocke', 'pass');
 INSERT INTO alexandria_forms.Profile (id, username, password) VALUES (5, 'slanger', 'pass');
 INSERT INTO alexandria_forms.Profile (id, username, password) VALUES (6, 'kmarx', 'pass');
+INSERT INTO alexandria_forms.Profile (id, username, password) VALUES (7, 'resident1', 'pass');
+INSERT INTO alexandria_forms.Profile (id, username, password) VALUES (8, 'staff1', 'pass');
 
-ALTER SEQUENCE alexandria_forms.profile_id_seq RESTART WITH 7;
+ALTER SEQUENCE alexandria_forms.profile_id_seq RESTART WITH 9;
 
-ALTER SEQUENCE alexandria_forms.person_id_seq RESTART WITH 8;
+ALTER SEQUENCE alexandria_forms.person_id_seq RESTART WITH 10;
 
-ALTER SEQUENCE alexandria_forms.doglicenseapplication_id_seq RESTART WITH 5;
+ALTER SEQUENCE alexandria_forms.doglicenseapplication_id_seq RESTART WITH 6;
 
 ALTER SEQUENCE alexandria_forms.breed_id_seq RESTART WITH 207;
 
@@ -45,7 +47,7 @@ INSERT INTO alexandria_forms.Breed (id, breed) VALUES (29, 'Belgian Tervuren');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (30, 'Bergamasco');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (31, 'Berger Picard');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (32, 'Bernese Mountain Dog');
-INSERT INTO alexandria_forms.Breed (id, breed) VALUES (33, 'Bichon Frisé');
+INSERT INTO alexandria_forms.Breed (id, breed) VALUES (33, 'Bichon Fris??');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (34, 'Black and Tan Coonhound');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (35, 'Black Russian Terrier');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (36, 'Bloodhound');
@@ -137,7 +139,7 @@ INSERT INTO alexandria_forms.Breed (id, breed) VALUES (121, 'Lagotto Romagnolo')
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (122, 'Lakeland Terrier');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (123, 'Leonberger');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (124, 'Lhasa Apso');
-INSERT INTO alexandria_forms.Breed (id, breed) VALUES (125, 'Löwchen');
+INSERT INTO alexandria_forms.Breed (id, breed) VALUES (125, 'L??wchen');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (126, 'Miniature Schnauzer');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (127, 'Maltese');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (128, 'Manchester Terrier');
@@ -162,7 +164,7 @@ INSERT INTO alexandria_forms.Breed (id, breed) VALUES (146, 'Papillon');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (147, 'Parson Russell Terrier');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (148, 'Pekingese');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (149, 'Pembroke Welsh Corgi');
-INSERT INTO alexandria_forms.Breed (id, breed) VALUES (150, 'Petit Basset Griffon Vendéen');
+INSERT INTO alexandria_forms.Breed (id, breed) VALUES (150, 'Petit Basset Griffon Vend??en');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (151, 'Pharaoh Hound');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (152, 'Plott');
 INSERT INTO alexandria_forms.Breed (id, breed) VALUES (153, 'Pointer');
@@ -228,24 +230,29 @@ INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (3, 'Karl',
 INSERT INTO alexandria_forms.Resident (id, address, city, zipCode, homePhone, workPhone, emailAddress, userProfile_id) VALUES (3, null, 'Alexandria', null, null, null, null, 6);
 INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (4, 'John', 'Anderson');
 INSERT INTO alexandria_forms.Resident (id, address, city, zipCode, homePhone, workPhone, emailAddress) VALUES (4, null, 'Alexandria', null, null, null, null);
+INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (5, 'Resident', 'One');
+INSERT INTO alexandria_forms.Resident (id, address, city, zipCode, homePhone, workPhone, emailAddress, userProfile_id) VALUES (5, null, 'Alexandria', null, null, null, null, 7);
 
 INSERT INTO alexandria_forms.DogLicenseApplication (id, status, petName, datePaid, hair, coloring, sex, neutered, birthDate, rabiesCertificate, paymentReceived, dogOwner_id, breed_id) VALUES (1, 'Draft', 'Pepa', null, 'Medium', 'red', 'Male', false, DATE '2017-03-23', null, 0.0, 3, 104);
 INSERT INTO alexandria_forms.DogLicenseApplication (id, status, petName, datePaid, hair, coloring, sex, neutered, birthDate, rabiesCertificate, paymentReceived, dogOwner_id, breed_id) VALUES (2, 'Submitted', 'Toby', null, 'Short', 'black', 'Male', true, DATE '2013-02-21', null, 0.0, 1, 73);
 INSERT INTO alexandria_forms.DogLicenseApplication (id, status, petName, datePaid, hair, coloring, sex, neutered, birthDate, rabiesCertificate, paymentReceived, dogOwner_id, breed_id) VALUES (3, 'Draft', 'Scooby', null, 'Long', 'yellow', 'Female', false, DATE '2009-05-14', null, 0.0, 2, 22);
 INSERT INTO alexandria_forms.DogLicenseApplication (id, status, petName, datePaid, hair, coloring, sex, neutered, birthDate, rabiesCertificate, paymentReceived, dogOwner_id, breed_id) VALUES (4, 'Submitted', 'Luna', null, 'Long', 'yellow', 'Female', false, DATE '2009-12-14', null, 0.0, 2, 17);
+INSERT INTO alexandria_forms.DogLicenseApplication (id, status, petName, datePaid, hair, coloring, sex, neutered, birthDate, rabiesCertificate, paymentReceived, dogOwner_id, breed_id) VALUES (5, 'Draft', 'wanda', null, 'Medium', 'Brown', 'Male', false, DATE '2015-12-07', null, 0.0, 5, 92);
 
-INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (5, 'System', 'Administrator');
-INSERT INTO alexandria_forms.SystemAdministrator (id, userProfile_id) VALUES (5, 1);
+INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (6, 'System', 'Administrator');
+INSERT INTO alexandria_forms.SystemAdministrator (id, userProfile_id) VALUES (6, 1);
 
-INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (6, 'Ayn', 'Rand');
-INSERT INTO alexandria_forms.CityOfficial (id, userProfile_id) VALUES (6, 2);
-INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (7, 'Thomas', 'Kuhn');
-INSERT INTO alexandria_forms.CityOfficial (id, userProfile_id) VALUES (7, 3);
+INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (7, 'Ayn', 'Rand');
+INSERT INTO alexandria_forms.CityOfficial (id, userProfile_id) VALUES (7, 2);
+INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (8, 'Thomas', 'Kuhn');
+INSERT INTO alexandria_forms.CityOfficial (id, userProfile_id) VALUES (8, 3);
+INSERT INTO alexandria_forms.Person (id, firstName, lastName) VALUES (9, 'Staff', 'One');
+INSERT INTO alexandria_forms.CityOfficial (id, userProfile_id) VALUES (9, 8);
 
-ALTER SEQUENCE alexandria_forms.profile_id_seq RESTART WITH 7;
+ALTER SEQUENCE alexandria_forms.profile_id_seq RESTART WITH 9;
 
-ALTER SEQUENCE alexandria_forms.person_id_seq RESTART WITH 8;
+ALTER SEQUENCE alexandria_forms.person_id_seq RESTART WITH 10;
 
-ALTER SEQUENCE alexandria_forms.doglicenseapplication_id_seq RESTART WITH 5;
+ALTER SEQUENCE alexandria_forms.doglicenseapplication_id_seq RESTART WITH 6;
 
 ALTER SEQUENCE alexandria_forms.breed_id_seq RESTART WITH 207;

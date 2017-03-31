@@ -128,13 +128,18 @@ public class DogLicenseApplicationResource {
     
     @DELETE
     @Path("instances/{id}")
-    @RolesAllowed({"SystemAdministrator"})
+    @RolesAllowed({"SystemAdministrator", "Resident"})
     public Response delete(@Context SecurityContext securityContext, @PathParam("id") Long id) {
         DogLicenseApplication found = service.find(id);
         if (found == null)
             return status(Response.Status.NOT_FOUND).entity("DogLicenseApplication not found: " + id).build();
         if (securityContext.isUserInRole("SystemAdministrator")) {
         	// no further checks
+        } else if (securityContext.isUserInRole("Resident")) {
+        	Resident asResident = SecurityHelper.getCurrentResident();
+        	if (!DogLicenseApplication.Permissions.canDelete(asResident, found)) {
+        		return status(Response.Status.FORBIDDEN).build();
+            }
         } else {
         	return status(Response.Status.FORBIDDEN).build();
         }                    
@@ -175,20 +180,7 @@ public class DogLicenseApplicationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("instances/{id}/actions/submit")
     @RolesAllowed({"SystemAdministrator", "CityOfficial", "Resident"})
-    public Response executeSubmit(@PathParam("id") Long id, Map<String, Object> representation) {
-        DogLicenseApplication found = service.find(id);
-        if (found == null)
-            return status(Response.Status.NOT_FOUND).entity("DogLicenseApplication not found: " + id).build();
-        /*Call: allTautologies*/
-        found.submit();
-        return status(Response.Status.OK).entity(toExternalRepresentation(found, uri.getRequestUri().resolve(".."))).build();
-    }
-    
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("instances/{id}/actions/receivePayment")
-    @RolesAllowed({"SystemAdministrator", "CityOfficial"})
-    public Response executeReceivePayment(@Context SecurityContext securityContext, @PathParam("id") Long id, Map<String, Object> representation) {
+    public Response executeSubmit(@Context SecurityContext securityContext, @PathParam("id") Long id, Map<String, Object> representation) {
         DogLicenseApplication found = service.find(id);
         if (found == null)
             return status(Response.Status.NOT_FOUND).entity("DogLicenseApplication not found: " + id).build();
@@ -196,10 +188,15 @@ public class DogLicenseApplicationResource {
         	// no further checks
         } else if (securityContext.isUserInRole("CityOfficial")) {
         	// no further checks
+        } else if (securityContext.isUserInRole("Resident")) {
+        	Resident asResident = SecurityHelper.getCurrentResident();
+        	if (!DogLicenseApplication.Permissions.isSubmitAllowedFor(asResident, found)) {
+        		return status(Response.Status.FORBIDDEN).build();
+            }
         } else {
         	return status(Response.Status.FORBIDDEN).build();
         }
-        found.receivePayment();
+        found.submit();
         return status(Response.Status.OK).entity(toExternalRepresentation(found, uri.getRequestUri().resolve(".."))).build();
     }
     
@@ -243,9 +240,9 @@ public class DogLicenseApplicationResource {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("instances/{id}/actions/cancel")
+    @Path("instances/{id}/actions/receivePayment")
     @RolesAllowed({"SystemAdministrator", "CityOfficial"})
-    public Response executeCancel(@Context SecurityContext securityContext, @PathParam("id") Long id, Map<String, Object> representation) {
+    public Response executeReceivePayment(@Context SecurityContext securityContext, @PathParam("id") Long id, Map<String, Object> representation) {
         DogLicenseApplication found = service.find(id);
         if (found == null)
             return status(Response.Status.NOT_FOUND).entity("DogLicenseApplication not found: " + id).build();
@@ -256,7 +253,61 @@ public class DogLicenseApplicationResource {
         } else {
         	return status(Response.Status.FORBIDDEN).build();
         }
-        found.cancel();
+        found.receivePayment();
+        return status(Response.Status.OK).entity(toExternalRepresentation(found, uri.getRequestUri().resolve(".."))).build();
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("instances/{id}/actions/withdraw")
+    @RolesAllowed({"SystemAdministrator", "Resident", "CityOfficial"})
+    public Response executeWithdraw(@Context SecurityContext securityContext, @PathParam("id") Long id, Map<String, Object> representation) {
+        DogLicenseApplication found = service.find(id);
+        if (found == null)
+            return status(Response.Status.NOT_FOUND).entity("DogLicenseApplication not found: " + id).build();
+        if (securityContext.isUserInRole("SystemAdministrator")) {
+        	// no further checks
+        } else if (securityContext.isUserInRole("Resident")) {
+        	Resident asResident = SecurityHelper.getCurrentResident();
+        	if (!DogLicenseApplication.Permissions.isWithdrawAllowedFor(asResident, found)) {
+        		return status(Response.Status.FORBIDDEN).build();
+            }
+        } else if (securityContext.isUserInRole("CityOfficial")) {
+        	CityOfficial asCityOfficial = SecurityHelper.getCurrentCityOfficial();
+        	if (!DogLicenseApplication.Permissions.isWithdrawAllowedFor(asCityOfficial, found)) {
+        		return status(Response.Status.FORBIDDEN).build();
+            }
+        } else {
+        	return status(Response.Status.FORBIDDEN).build();
+        }
+        found.withdraw();
+        return status(Response.Status.OK).entity(toExternalRepresentation(found, uri.getRequestUri().resolve(".."))).build();
+    }
+    
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("instances/{id}/actions/reactivate")
+    @RolesAllowed({"SystemAdministrator", "Resident", "CityOfficial"})
+    public Response executeReactivate(@Context SecurityContext securityContext, @PathParam("id") Long id, Map<String, Object> representation) {
+        DogLicenseApplication found = service.find(id);
+        if (found == null)
+            return status(Response.Status.NOT_FOUND).entity("DogLicenseApplication not found: " + id).build();
+        if (securityContext.isUserInRole("SystemAdministrator")) {
+        	// no further checks
+        } else if (securityContext.isUserInRole("Resident")) {
+        	Resident asResident = SecurityHelper.getCurrentResident();
+        	if (!DogLicenseApplication.Permissions.isReactivateAllowedFor(asResident, found)) {
+        		return status(Response.Status.FORBIDDEN).build();
+            }
+        } else if (securityContext.isUserInRole("CityOfficial")) {
+        	CityOfficial asCityOfficial = SecurityHelper.getCurrentCityOfficial();
+        	if (!DogLicenseApplication.Permissions.isReactivateAllowedFor(asCityOfficial, found)) {
+        		return status(Response.Status.FORBIDDEN).build();
+            }
+        } else {
+        	return status(Response.Status.FORBIDDEN).build();
+        }
+        found.reactivate();
         return status(Response.Status.OK).entity(toExternalRepresentation(found, uri.getRequestUri().resolve(".."))).build();
     }
     
@@ -329,7 +380,6 @@ public class DogLicenseApplicationResource {
             queries.put("pendingPayment", Arrays.asList("StaticCall"));
             queries.put("pendingApproval", Arrays.asList("StaticCall"));
             queries.put("paidWithinPeriod", Arrays.asList("StaticCall"));
-            queries.put("dogOwners", Arrays.asList("StaticCall"));
         }
         if (securityContext.isUserInRole(SystemAdministrator.ROLE_ID)) {
             entityCapabilities.add("Create");
@@ -339,7 +389,6 @@ public class DogLicenseApplicationResource {
             queries.put("pendingPayment", Arrays.asList("StaticCall"));
             queries.put("pendingApproval", Arrays.asList("StaticCall"));
             queries.put("paidWithinPeriod", Arrays.asList("StaticCall"));
-            queries.put("dogOwners", Arrays.asList("StaticCall"));
         }
         if (securityContext.isUserInRole(Resident.ROLE_ID)) {
             entityCapabilities.add("Create");
@@ -361,10 +410,11 @@ public class DogLicenseApplicationResource {
         result.put("instance", instance);
         result.put("actions", actions);
         actions.put("submit", new LinkedHashSet<String>());
-        actions.put("receivePayment", new LinkedHashSet<String>());
         actions.put("reject", new LinkedHashSet<String>());
         actions.put("approve", new LinkedHashSet<String>());
-        actions.put("cancel", new LinkedHashSet<String>());
+        actions.put("receivePayment", new LinkedHashSet<String>());
+        actions.put("withdraw", new LinkedHashSet<String>());
+        actions.put("reactivate", new LinkedHashSet<String>());
         result.put("relationships", relationships);
         result.put("attributes", attributes);
         
@@ -386,10 +436,6 @@ public class DogLicenseApplicationResource {
             if (DogLicenseApplication.Permissions.isSubmitAllowedFor(asCityOfficial, found)) {
                 actions.get("submit").add("Call");
             }
-            // receivePayment
-            if (DogLicenseApplication.Permissions.isReceivePaymentAllowedFor(asCityOfficial, found)) {
-                actions.get("receivePayment").add("Call");
-            }
             // reject
             if (DogLicenseApplication.Permissions.isRejectAllowedFor(asCityOfficial, found)) {
                 actions.get("reject").add("Call");
@@ -398,9 +444,17 @@ public class DogLicenseApplicationResource {
             if (DogLicenseApplication.Permissions.isApproveAllowedFor(asCityOfficial, found)) {
                 actions.get("approve").add("Call");
             }
-            // cancel
-            if (DogLicenseApplication.Permissions.isCancelAllowedFor(asCityOfficial, found)) {
-                actions.get("cancel").add("Call");
+            // receivePayment
+            if (DogLicenseApplication.Permissions.isReceivePaymentAllowedFor(asCityOfficial, found)) {
+                actions.get("receivePayment").add("Call");
+            }
+            // withdraw
+            if (DogLicenseApplication.Permissions.isWithdrawAllowedFor(asCityOfficial, found)) {
+                actions.get("withdraw").add("Call");
+            }
+            // reactivate
+            if (DogLicenseApplication.Permissions.isReactivateAllowedFor(asCityOfficial, found)) {
+                actions.get("reactivate").add("Call");
             }
         }
         if (securityContext.isUserInRole(SystemAdministrator.ROLE_ID)) {
@@ -418,10 +472,6 @@ public class DogLicenseApplicationResource {
             if (DogLicenseApplication.Permissions.isSubmitAllowedFor(asSystemAdministrator, found)) {
                 actions.get("submit").add("Call");
             }
-            // receivePayment
-            if (DogLicenseApplication.Permissions.isReceivePaymentAllowedFor(asSystemAdministrator, found)) {
-                actions.get("receivePayment").add("Call");
-            }
             // reject
             if (DogLicenseApplication.Permissions.isRejectAllowedFor(asSystemAdministrator, found)) {
                 actions.get("reject").add("Call");
@@ -430,9 +480,17 @@ public class DogLicenseApplicationResource {
             if (DogLicenseApplication.Permissions.isApproveAllowedFor(asSystemAdministrator, found)) {
                 actions.get("approve").add("Call");
             }
-            // cancel
-            if (DogLicenseApplication.Permissions.isCancelAllowedFor(asSystemAdministrator, found)) {
-                actions.get("cancel").add("Call");
+            // receivePayment
+            if (DogLicenseApplication.Permissions.isReceivePaymentAllowedFor(asSystemAdministrator, found)) {
+                actions.get("receivePayment").add("Call");
+            }
+            // withdraw
+            if (DogLicenseApplication.Permissions.isWithdrawAllowedFor(asSystemAdministrator, found)) {
+                actions.get("withdraw").add("Call");
+            }
+            // reactivate
+            if (DogLicenseApplication.Permissions.isReactivateAllowedFor(asSystemAdministrator, found)) {
+                actions.get("reactivate").add("Call");
             }
         }
         if (securityContext.isUserInRole(Resident.ROLE_ID)) {
@@ -449,6 +507,14 @@ public class DogLicenseApplicationResource {
             // submit
             if (DogLicenseApplication.Permissions.isSubmitAllowedFor(asResident, found)) {
                 actions.get("submit").add("Call");
+            }
+            // withdraw
+            if (DogLicenseApplication.Permissions.isWithdrawAllowedFor(asResident, found)) {
+                actions.get("withdraw").add("Call");
+            }
+            // reactivate
+            if (DogLicenseApplication.Permissions.isReactivateAllowedFor(asResident, found)) {
+                actions.get("reactivate").add("Call");
             }
         }
         return status(Response.Status.OK).entity(result).build();

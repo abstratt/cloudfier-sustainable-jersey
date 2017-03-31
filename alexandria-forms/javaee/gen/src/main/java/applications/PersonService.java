@@ -13,6 +13,7 @@ import javax.enterprise.context.*;
 import static util.PersistenceHelper.*;
 import static util.SecurityHelper.*;
 
+import alexandria_forms.*;
 import userprofile.*;
 import applications.CityOfficial;
 import applications.SystemAdministrator;

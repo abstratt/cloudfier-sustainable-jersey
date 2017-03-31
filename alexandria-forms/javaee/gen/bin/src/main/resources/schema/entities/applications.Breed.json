@@ -1,0 +1,66 @@
+{
+	"mnemonicProperty": "breed",
+    "concrete": true,
+    "instantiable": true,
+    "standalone": true,
+    "topLevel": true,
+    "role": false,
+    "namespace": "applications",
+    "description": "",
+    "label": "Breed",
+    "name": "Breed",
+    "symbol": "Breed",
+    "uri": "${baseUri}entities/applications.Breed",
+    "fullName": "applications.Breed",
+    "extentUri": "${baseUri}entities/applications.Breed/instances/",
+    "entityActionUriTemplate": "${baseUri}entities/applications.Breed/actions/(actionName)",
+    "instanceUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)",
+    "instanceActionUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)/actions/(actionName)",
+    "relationshipDomainUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)/relationships/(relationshipName)/domain",
+    "relatedInstancesUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)/relationships/(relationshipName)",
+    "relatedInstanceUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)/relationships/(relationshipName)/(relatedObjectId)",
+    "instanceActionParameterDomainUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)/actions/(actionName)/parameters/(parameterName)/domain",
+    "finderUriTemplate": "${baseUri}entities/applications.Breed/finders/(finderName)",
+    "entityCapabilityUri": "${baseUri}entities/applications.Breed/capabilities",
+    "instanceCapabilityUriTemplate": "${baseUri}entities/applications.Breed/instances/(objectId)/capabilities",
+    "operations" : {
+    },
+    "properties" : {
+        "breed" : {
+            "unique": false,
+            "mnemonic": true,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "Breed",
+                "fullName": "applications.Breed"
+            },
+            "description": "",
+            "label": "Breed",
+            "name": "breed",
+            "symbol": "breed"
+        }
+    },
+    "relationships" : {
+    },
+    "superTypes": [
+    ],
+    "subTypes": [
+    ],
+    "orderedDataElements": [
+    	"breed"
+    ]
+}

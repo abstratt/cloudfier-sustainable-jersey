@@ -27,6 +27,7 @@ import resource.alexandria_forms.*;
 import resource.userprofile.*;
 import userprofile.*;
 
+import alexandria_forms.*;
 import applications.CityOfficial;
 import applications.SystemAdministrator;
 import applications.Resident;

@@ -11,6 +11,7 @@ import javax.enterprise.event.*;
 import javax.enterprise.context.*;
 import static util.PersistenceHelper.*;
 import static util.SecurityHelper.*;
+import alexandria_forms.*;
 import userprofile.*;
 import applications.CityOfficial;
 import applications.SystemAdministrator;
@@ -156,7 +157,7 @@ public class DogLicenseApplication {
     
     public void submit() {
         if ( (this.getRabiesCertificate() == null)) {
-            // predicate violated
+            // precondition violated
             throw new RabiesCertificateRecordMustBeAttachedException();
         }
         this.handleEvent(StatusEvent.Submit);

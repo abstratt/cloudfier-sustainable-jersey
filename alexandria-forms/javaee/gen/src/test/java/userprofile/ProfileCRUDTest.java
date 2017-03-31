@@ -43,7 +43,7 @@ public class ProfileCRUDTest {
     @Test
     public void create() {
         Profile toCreate = new Profile();
-        toCreate.setUsername("218ee429-dbfb-44d1-9fc3-6f321a3d0058");
+        toCreate.setUsername("64f2b8e0-c738-4529-8617-362ff911a6ea");
         toCreate.setPassword("");
         Profile created = profileService.create(toCreate);
         Object id = created.getId();
@@ -58,11 +58,11 @@ public class ProfileCRUDTest {
     @Test
     public void retrieve() {
         Profile toCreate1 = new Profile();
-        toCreate1.setUsername("a980effe-0593-4504-9040-93bc7e9cd6c3");
+        toCreate1.setUsername("4ece6c00-931d-468a-bbcb-9ffa9382a7b4");
         toCreate1.setPassword("");
         profileService.create(toCreate1);
         Profile toCreate2 = new Profile();
-        toCreate2.setUsername("54971348-86d4-4d26-b3e2-44d581aefce6");
+        toCreate2.setUsername("766f43bb-3b1b-42f2-b84e-ca4852b208a1");
         toCreate2.setPassword("");
         profileService.create(toCreate2);
         PersistenceHelper.flush(true);
@@ -77,7 +77,7 @@ public class ProfileCRUDTest {
     @Test
     public void update() {
         Profile toCreate = new Profile();
-        toCreate.setUsername("863a6c34-0f2b-46ce-ad18-3a36bf4b0e0c");
+        toCreate.setUsername("2ca13168-8eb0-4292-82bc-870c0a84d6d1");
         toCreate.setPassword("");
         Object id = profileService.create(toCreate).getId();
         PersistenceHelper.flush(true);
@@ -92,7 +92,7 @@ public class ProfileCRUDTest {
     @Test
     public void delete() {
         Profile toDelete = new Profile();
-        toDelete.setUsername("8d0b7281-fefc-4e49-b641-c3dde7afed83");
+        toDelete.setUsername("938d99b2-130f-4d0e-b703-5beb0e1a2a9f");
         toDelete.setPassword("");
         Object id = profileService.create(toDelete).getId();
         assertNotNull(profileService.find(id));

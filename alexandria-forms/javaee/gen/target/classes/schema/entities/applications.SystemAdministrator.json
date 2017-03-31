@@ -1,0 +1,162 @@
+{
+	"mnemonicProperty": "fullName",
+    "concrete": true,
+    "instantiable": true,
+    "standalone": true,
+    "topLevel": true,
+    "role": true,
+    "namespace": "applications",
+    "description": "",
+    "label": "System Administrator",
+    "name": "SystemAdministrator",
+    "symbol": "SystemAdministrator",
+    "uri": "${baseUri}entities/applications.SystemAdministrator",
+    "fullName": "applications.SystemAdministrator",
+    "extentUri": "${baseUri}entities/applications.SystemAdministrator/instances/",
+    "entityActionUriTemplate": "${baseUri}entities/applications.SystemAdministrator/actions/(actionName)",
+    "instanceUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)",
+    "instanceActionUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)/actions/(actionName)",
+    "relationshipDomainUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)/relationships/(relationshipName)/domain",
+    "relatedInstancesUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)/relationships/(relationshipName)",
+    "relatedInstanceUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)/relationships/(relationshipName)/(relatedObjectId)",
+    "instanceActionParameterDomainUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)/actions/(actionName)/parameters/(parameterName)/domain",
+    "finderUriTemplate": "${baseUri}entities/applications.SystemAdministrator/finders/(finderName)",
+    "entityCapabilityUri": "${baseUri}entities/applications.SystemAdministrator/capabilities",
+    "instanceCapabilityUriTemplate": "${baseUri}entities/applications.SystemAdministrator/instances/(objectId)/capabilities",
+    "operations" : {
+    },
+    "properties" : {
+        "fullName" : {
+            "unique": false,
+            "mnemonic": true,
+            "userVisible": true,
+            "derived": true,
+            "editable": false,
+            "initializable": false,
+            "hasDefault": true,
+            "multiple": false,
+            "required": false,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "SystemAdministrator",
+                "fullName": "applications.SystemAdministrator"
+            },
+            "description": "",
+            "label": "Full Name",
+            "name": "fullName",
+            "symbol": "fullName"
+        }
+        ,
+        "firstName" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "SystemAdministrator",
+                "fullName": "applications.SystemAdministrator"
+            },
+            "description": "",
+            "label": "First Name",
+            "name": "firstName",
+            "symbol": "firstName"
+        }
+        ,
+        "lastName" : {
+            "unique": false,
+            "mnemonic": false,
+            "userVisible": true,
+            "derived": false,
+            "editable": true,
+            "initializable": true,
+            "hasDefault": false,
+            "multiple": false,
+            "required": true,
+            "typeRef": {
+                "entityNamespace": "mdd_types",
+                "kind": "Primitive",
+                "typeName": "String",
+                "fullName": "mdd_types.String"
+            },
+            "owner": {
+                "entityNamespace": "applications",
+                "kind": "Entity",
+                "typeName": "SystemAdministrator",
+                "fullName": "applications.SystemAdministrator"
+            },
+            "description": "",
+            "label": "Last Name",
+            "name": "lastName",
+            "symbol": "lastName"
+        }
+    },
+    "relationships" : {
+        "userProfile": {
+          "navigable": true,
+          "opposite": "roleAsSystemAdministrator",
+          "oppositeRequired": false,
+          "oppositeReadOnly": true,
+          "primary": true,
+          "style": "LINK",
+          "derived": false,
+          "editable": false,
+          "initializable": false,
+          "userVisible": true,
+          "hasDefault": false,
+          "multiple": false,
+          "required": false,
+          "typeRef": {
+              "entityNamespace": "userprofile",
+              "kind": "Entity",
+              "typeName": "Profile",
+              "fullName": "userprofile.Profile"
+          },
+          "owner": {
+              "entityNamespace": "applications",
+              "kind": "Entity",
+              "typeName": "SystemAdministrator",
+              "fullName": "applications.SystemAdministrator"
+          },
+          "description": "",
+          "label": "User Profile",
+          "name": "userProfile",
+          "symbol": "userProfile"
+        }
+    },
+    "superTypes": [
+    	{
+    	    "entityNamespace": "applications",
+    	    "kind": "Entity",
+    	    "typeName": "Person",
+    	    "fullName": "applications.Person"
+    	}
+    ],
+    "subTypes": [
+    ],
+    "orderedDataElements": [
+    	"fullName",
+    	"firstName",
+    	"lastName",
+    	"userProfile"
+    ]
+}

@@ -28,7 +28,7 @@ problems and come up with solutions.
 
 [REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode)
 
-[Generated code](java-ee/gen) (Java EE)
+[Generated code](javaee/gen) (Java EE)
 
 ### Live Diagrams
 

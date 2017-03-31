@@ -34,11 +34,11 @@ problems and come up with solutions.
 
 #### Class diagram
 
-![Class diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-alexandria-forms/package/applications.uml?showClassifierCompartments=Always&showStaticFeatures=true&showClasses=true&showAssociationEndName=true&showAttributes=true&showOperations=true&showComments=true&showParameters=true&showAssociationEndMultiplicity=true&showMinimumVisibility=Public&showFeatureVisibility=false&showParameterNames=false&showDerivedElements=false)
+![Class diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-alexandria-forms/package/applications.uml?showClassifierCompartments=Always&showStaticFeatures=true&showClasses=true&showAssociationEndName=true&showAttributes=true&showOperations=true&showComments=true&showParameters=true&showAssociationEndMultiplicity=true&showMinimumVisibility=Public&showFeatureVisibility=false&showParameterNames=false&showDerivedElements=false&showDerivedElements=false)
 
 #### Statechart diagram
 
-![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-alexandria-forms/package/applications.uml?showStateMachines=true)
+![Statechart diagram for the application](https://develop.cloudfier.com/services/diagram/test-cloudfier-sustainable-jersey-alexandria-forms/package/applications.uml?showStateMachines=true&showStateMachines=true)
 
 
 ### License

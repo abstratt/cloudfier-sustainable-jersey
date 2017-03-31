@@ -45,6 +45,10 @@ class DogLicenseApplication
         else
             return self.datePaid;
     };
+    
+    private derived attribute ownApplication : Boolean := {
+    	self.dogOwner == (System#user() as Resident)
+    };
 
     attribute hair : HairType;
 
@@ -54,7 +58,7 @@ class DogLicenseApplication
 
     attribute sex : Gender;
 
-    attribute neutered : Boolean;
+    attribute neutered : Boolean := false;
 
     attribute birthDate : Date;
 
@@ -144,7 +148,7 @@ class DogLicenseApplication
         precondition RabiesCertificateRecordMustBeAttached {
             not (self.rabiesCertificate == null)
         }
-        allow Resident call;
+        allow Resident call { self.ownApplication };
 
     operation receivePayment();
     begin
@@ -156,18 +160,19 @@ class DogLicenseApplication
 
     operation approve();
 
-    operation cancel();
+    operation withdraw()
+        allow Resident call { self.ownApplication };
 
     statemachine Status
 
         initial state Draft
             transition on call(submit) to Submitted;
-            transition on call(cancel) to Canceled;
+            transition on call(withdraw) to Withdrawn;
         end;
 
         state Submitted
             transition on call(receivePayment) to Paid;
-            transition on call(cancel) to Canceled;
+            transition on call(withdraw) to Withdrawn;
         end;
 
         state Paid
@@ -179,7 +184,7 @@ class DogLicenseApplication
 
         state Rejected end;
 
-        state Canceled end;
+        state Withdrawn end;
 
     end;
 end;

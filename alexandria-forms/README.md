@@ -4,7 +4,7 @@
 efficient, Alexandria needs help digitizing certain public records and bring
 government functions online (i.e. interactive forms, applications, permits,
 service requests, etc.) The Township doesn't have the finances to fix these
-problems and come up with solutions. 
+problems and come up with solutions.
 
 ### Impact statement
 

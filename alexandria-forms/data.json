@@ -755,19 +755,6 @@
         "breed": "applications.Breed@17"
       },
       {
-        "internalNumber": 14,
-        "status": "Draft",
-        "petName": "layla",
-        "hair": "Medium",
-        "coloring": "yellow",
-        "sex": "Female",
-        "neutered": true,
-        "birthDate": "2014-03-30",
-        "paymentReceived": 0.0,
-        "dogOwner": "applications.Resident@5",
-        "breed": "applications.Breed@177"
-      },
-      {
         "internalNumber": 17,
         "status": "Draft",
         "petName": "wanda",

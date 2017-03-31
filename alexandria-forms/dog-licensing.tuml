@@ -20,7 +20,7 @@ class DogLicenseApplication
 
     allow Resident read{ (System#user() as Resident) == self.dogOwner };
 
-    allow Resident update{
+    allow Resident update, delete {
         (System#user() as Resident) == self.dogOwner and (self.status < Status#Submitted)
     };
 
@@ -150,24 +150,28 @@ class DogLicenseApplication
         }
         allow Resident call { self.ownApplication };
 
+    operation reject();
+
+    operation approve();
+    
     operation receivePayment();
     begin
         self.paymentReceived := self.requiredFee;
         self.datePaid := Date#today();
     end;
-
-    operation reject();
-
-    operation approve();
-
+    
     operation withdraw()
-        allow Resident call { self.ownApplication };
+        allow Resident call { self.ownApplication }
+        allow CityOfficial call { false };
+
+    operation reactivate()
+        allow Resident call { self.ownApplication }
+        allow CityOfficial call { false };
 
     statemachine Status
 
         initial state Draft
             transition on call(submit) to Submitted;
-            transition on call(withdraw) to Withdrawn;
         end;
 
         state Submitted
@@ -184,7 +188,9 @@ class DogLicenseApplication
 
         state Rejected end;
 
-        state Withdrawn end;
+        state Withdrawn
+            transition on call(reactivate) to Draft;
+        end;
 
     end;
 end;

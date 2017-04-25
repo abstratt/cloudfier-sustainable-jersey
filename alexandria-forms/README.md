@@ -22,6 +22,10 @@ problems and come up with solutions.
 
 [Demo 1](https://www.youtube.com/watch?v=ZxgdjRpydiA)
 
+### Presentation at Coding for Community
+
+[Video](https://www.youtube.com/watch?v=Rdtyz3IJv0E&t=409s)
+
 ### Live app
 
 [User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode - log in as resident1/pass or staff1/pass) 

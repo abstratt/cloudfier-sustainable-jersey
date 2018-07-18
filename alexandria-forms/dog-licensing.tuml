@@ -14,7 +14,7 @@ class DogLicenseApplication
 
     allow SystemAdministrator all;
 
-    allow CityOfficial create, read, update, call, static call;
+    allow CityOfficial create, read, update, call;
 
     allow Resident create;
 

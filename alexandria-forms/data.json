@@ -1,36 +1,36 @@
 {
   "userprofile": {
-    "Profile": [
+    "UserProfile": [
       {
-        "username": "admin",
+        "username": "admin@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "arand",
+        "username": "arand@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "tkuhn",
+        "username": "tkuhn@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "jlocke",
+        "username": "jlocke@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "slanger",
+        "username": "slanger@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "kmarx",
+        "username": "kmarx@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "resident1",
+        "username": "resident1@abstratt.com",
         "password": "pass"
       },
       {
-        "username": "staff1",
+        "username": "staff1@abstratt.com",
         "password": "pass"
       }
     ]
@@ -661,19 +661,19 @@
         "firstName": "John",
         "lastName": "Locke",
         "city": "Alexandria",
-        "userProfile": "userprofile.Profile@4"
+        "userProfile": "userprofile.UserProfile@4"
       },
       {
         "firstName": "Susanne",
         "lastName": "Langer",
         "city": "Alexandria",
-        "userProfile": "userprofile.Profile@5"
+        "userProfile": "userprofile.UserProfile@5"
       },
       {
         "firstName": "Karl",
         "lastName": "Marx",
         "city": "Alexandria",
-        "userProfile": "userprofile.Profile@6"
+        "userProfile": "userprofile.UserProfile@6"
       },
       {
         "firstName": "John",
@@ -684,7 +684,7 @@
         "firstName": "Resident",
         "lastName": "One",
         "city": "Alexandria",
-        "userProfile": "userprofile.Profile@7"
+        "userProfile": "userprofile.UserProfile@7"
       }
     ],
     "DogLicenseApplication": [
@@ -779,24 +779,24 @@
       {
         "firstName": "System",
         "lastName": "Administrator",
-        "userProfile": "userprofile.Profile@1"
+        "userProfile": "userprofile.UserProfile@1"
       }
     ],
     "CityOfficial": [
       {
         "firstName": "Ayn",
         "lastName": "Rand",
-        "userProfile": "userprofile.Profile@2"
+        "userProfile": "userprofile.UserProfile@2"
       },
       {
         "firstName": "Thomas",
         "lastName": "Kuhn",
-        "userProfile": "userprofile.Profile@3"
+        "userProfile": "userprofile.UserProfile@3"
       },
       {
         "firstName": "Staff",
         "lastName": "One",
-        "userProfile": "userprofile.Profile@8"
+        "userProfile": "userprofile.UserProfile@8"
       }
     ]
   }

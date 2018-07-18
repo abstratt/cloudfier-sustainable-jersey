@@ -28,7 +28,7 @@ problems and come up with solutions.
 
 ### Live app
 
-[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode - log in as resident1/pass or staff1/pass) 
+[User-interface](http://develop.cloudfier.com/kirra-api/kirra-ng/?app-path=/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode - log in as resident1@abstratt.com/pass or staff1@abstratt.com/pass) 
 
 [REST API](http://develop.cloudfier.com/services/api-v2/test-cloudfier-sustainable-jersey-alexandria-forms/) (prototype mode)
 
